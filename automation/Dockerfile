@@ -16,3 +16,5 @@ RUN pip install --no-cache-dir --requirement /tmp/py_requirements.txt && \
     fix-permissions "/home/${NB_USER}"
 
 COPY . .
+
+CMD ["jupyter", "notebook", "--no-browser","--NotebookApp.token=''","--NotebookApp.password=''"]

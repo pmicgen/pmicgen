@@ -1,13 +1,14 @@
 import gdsfactory as gf
 
-def demo_polygons():
-    c = gf.Component("demo")
+import sky130.components as sc
+import sky130.tech as st
+import sky130.pcells as pc
 
-    c.add_polygon(
-        [(-8, 6, 7, 9), (-6, 8, 17, 5)], layer=(1, 0)
-    )
+def pnpoly():
+    c = gf.Component("pnpoly")
+    c = pc.p_n_poly()
     return c
 
-c = demo_polygons()
-c.write_gds("demo.gds")
+c = pnpoly()
+c.write_gds("build/pnpoly.gds")
 c.show()

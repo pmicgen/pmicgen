@@ -7,7 +7,6 @@ dependencies:
   - python=3.11
   - ipykernel
   - jupyterlab
-  - open_pdks.sky130a==1.0.284_0_g89d8afc
   - ngspice
   - magic
   - netgen

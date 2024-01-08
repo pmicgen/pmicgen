@@ -26,6 +26,8 @@ RUN \
     echo conda activate "${env_name}" >> /etc/skel/.bashrc && \
     echo conda activate "${env_name}" >> "/home/${NB_USER}/.bashrc"
 
+RUN volare enable $(volare ls-remote --pdk sky130a | sed -n '1 p')
+
 COPY . .
 
 CMD ["jupyter", "notebook", "--allow-root", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''"]

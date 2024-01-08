@@ -27,7 +27,7 @@ from pcells import LDOPCellLib
 # Instantiate and register the library
 LDOPCellLib()
 
-print("## LDP PCell loaded.")
+print("## LDO PCell loaded.")
 print(sys.path)
 
 import sys

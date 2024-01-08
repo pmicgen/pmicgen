@@ -1,4 +1,4 @@
-from component import *
+from .component import *
 
 class Bandgap(LDOComponent):
     pass

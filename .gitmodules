@@ -1,6 +1,0 @@
-[submodule "automation/thirdparty/cca/Common_Centroid_Algorithm"]
-	path = automation/thirdparty/cca/Common_Centroid_Algorithm
-	url = https://github.com/Mario1159/Common_Centroid_Algorithm
-[submodule "automation/thirdparty/Common_Centroid_Algorithm"]
-	path = automation/thirdparty/Common_Centroid_Algorithm
-	url = https://github.com/Mario1159/Common_Centroid_Algorithm

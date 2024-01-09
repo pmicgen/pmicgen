@@ -4,9 +4,9 @@ from .component import *
 
 import sys
 import os
-sys.path.insert(0, os.path.abspath( os.path.join(os.path.dirname(__file__), 
-                                               '..') ))
+sys.path.insert(0, os.path.abspath( os.path.join(os.path.dirname(__file__), '..') ))
 from thirdparty.cca.cc import *
+from pymacros.gdsfactory.ccres import *
 
 from typing import *
 from dataclasses import dataclass
@@ -73,6 +73,7 @@ class CommonCentroidMatrix:
     cell_matrix: list[list[Cell]]
     element_count: int
     ratio: float
+    layout: gf.Component
 
     def __init__(self, element_count, ratio, row_number):
         self.element_count = element_count
@@ -101,22 +102,32 @@ class CommonCentroidMatrix:
         print(arr)
 
         arr = np.array(arr[:len(arr)]).reshape(output_from_ca.shape[0], output_from_ca.shape[1])
-        #self.layers = [Layer(self, [np.zeros((output_from_ca.shape[0], output_from_ca.shape[1]), dtype=MatrixElement)])]
         self.layers = [Layer(self, [[None for _ in range(output_from_ca.shape[1])] for _ in range(output_from_ca.shape[0])])]
+        self.cell_matrix = [[Cell for _ in range(output_from_ca.shape[1])] for _ in range(output_from_ca.shape[0])]
 
         for iy, ix in np.ndindex(arr.shape):
             ab_type = arr[iy, ix] > a_element_count + 1
-            self.layers[0].rows[iy][ix] = Cell(self.layers[0], ix, iy, 10, 10, ab_type)        
+            self.cell_matrix[iy][ix] = Cell(self.layers[0], ix, iy, 10, 10, ab_type)
+            self.layers[0].rows[iy][ix] = Cell(self.layers[0], ix, iy, 10, 10, ab_type)
+        
+        self.layout = self.cell_layout_repr()
 
-    def connect_cells(x0, y0, x1, x2, z: int):
+    def connect_cells(self, x0, y0, x1, x2, z: int):
         pass
 
-    def layer_repr():
-        pass
+    def cell_matrix_size(self) -> Tuple[float, float]:
+        x = len(self.cell_matrix)
+        y = len(self.cell_matrix[0])
+        return (x, y)
 
-    def cells_repr(self):
-        repr: list[list[str]]
-        for row, row_index in self.cell_matrix:
-            for cell in row:
-                repr[row_index] = cell.type_ab
+    def cell_layout_repr(self) -> gf.Component:
+        cell_matrix_size = self.cell_matrix_size()
+        return pnpoly_matrix(cell_matrix_size[0], cell_matrix_size[1])
+
+    def cells_repr(self) -> list[list[str]]:
+        cell_matrix_size = cell_matrix_size()
+        repr: list[list[str]] = [[str for _ in range(cell_matrix_size[1])] for _ in range(cell_matrix_size[0])]
+        for row_index, row in enumerate(self.cell_matrix):
+            for col_index, cell in enumerate(row):
+                repr[row_index][col_index] = cell.type_ab
         return repr

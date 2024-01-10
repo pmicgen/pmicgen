@@ -1,4 +1,4 @@
-FROM jupyter/minimal-notebook
+FROM quay.io/jupyter/minimal-notebook
 
 ARG env_name=python311
 ARG py_ver=3.11
@@ -26,8 +26,13 @@ RUN \
     echo conda activate "${env_name}" >> /etc/skel/.bashrc && \
     echo conda activate "${env_name}" >> "/home/${NB_USER}/.bashrc"
 
-RUN volare enable $(volare ls-remote --pdk sky130a | sed -n '1 p')
+# TODO: Fix this absolute path
+RUN /opt/conda/envs/python311/bin/volare enable $(/opt/conda/envs/python311/bin/volare ls-remote | sed -n '1 p')
+
+# Remove previous default kernel
+RUN jupyter kernelspec remove -y python3
 
 COPY . .
 
-CMD ["jupyter", "notebook", "--allow-root", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+# TODO: Non root access (change default user to jovyan)
+CMD ["jupyter", "notebook", "--allow-root", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''", "--KernelSpecManager.ensure_native_kernel=False"]

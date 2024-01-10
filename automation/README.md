@@ -5,5 +5,5 @@
     ├── gf                   # GDSFactory Layouts
     ├── magic                # Magic VLSI Designs
     ├── pymacros             # KLayout cell library
-    ├──  test                 # Unit tests
+    ├── test                 # Unit tests
     └── thirdparty           # Submodules of external projects

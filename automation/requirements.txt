@@ -2,3 +2,7 @@ argparse==1.4.0
 klayout==0.28.14
 sky130==0.9.0
 volare==0.15.2
+gdsfactory==7.8.17
+matplotlib==3.8.2
+numpy==1.26.3
+astar==0.99

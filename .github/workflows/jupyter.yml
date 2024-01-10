@@ -28,4 +28,4 @@ jobs:
           file: automation/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: mario1159/ldo_cac:latest
+          tags: ghcr.io/mario1159/ldo_cac:latest

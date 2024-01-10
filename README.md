@@ -2,7 +2,18 @@
 Automated generation of an LDO for SKY130
 
 ## Usage
-To build the docker image and run it, execute `make` and open `localhost:8888` in your browser to access the Jupyter notebook.
+
+Run latest build of the docker image using the command shown below.
+
+```
+docker run -d --name ldo_cac_jupyter -p 8888:8888 --user root -e GRANT_SUDO=yes ghcr.io/mario1159/ldo_cac
+```
+
+Then open `localhost:8888` in your browser to access the Jupyter notebook.
+
+You can also build the image yourself running the `build` or `all` target in `make`
+
+## How it works
 
 The project provides a script to make an entire LDO based on certain specification or just certains components of it.
 This script is executed in detail providing some reports inside the jupyter notebook and can serve as an example to run just the python script.

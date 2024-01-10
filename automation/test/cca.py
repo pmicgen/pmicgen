@@ -4,7 +4,7 @@ import os
 
 sys.path.insert(0, os.path.abspath( os.path.join(os.path.dirname(__file__), '..') ))
 
-from src.ccres import *
+from genutils.ccres import *
 
 ccm = CommonCentroidMatrix(4, 0.2, 4)
 ccm.layout.show()

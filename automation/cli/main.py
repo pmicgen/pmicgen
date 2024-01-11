@@ -1,6 +1,7 @@
-from component import *
-from ota import OTA
-from ccres import CCResistor
+import sys
+import os
+sys.path.insert(0, os.path.abspath( os.path.join(os.path.dirname(__file__), '..') ))
+from genutils import *
 
 import argparse
 
@@ -9,12 +10,22 @@ def main():
                     prog='LDO CAC',
                     description='Automated generation of an LDO for SKY130',
                     epilog='AC3E 2024')
-    parser.add_argument('component', type=LDOComponentType, choices=list(LDOComponentType))
-    args = parser.parse_args()
+    parser.add_argument('pdk', type=PDK, choices=list(PDK))
+    subparsers = parser.add_subparsers(dest="component")
+    
+    parser_passtrans = subparsers.add_parser(LDOComponentType.PASS_TRANSISTOR.value)
+    parser_passtrans.add_argument("pcell")
+    parser_passtrans = subparsers.add_parser(LDOComponentType.OTA.value)
+    parser_passtrans = subparsers.add_parser(LDOComponentType.CCRESISTOR.value)
+    parser_passtrans = subparsers.add_parser(LDOComponentType.BANDGAP.value)
 
+    args = parser.parse_args()
+    print(args)
+
+    tech = TechManager(args.pdk)
     match str(args.component):
         case LDOComponentType.PASS_TRANSISTOR.value:
-            component = PassTransistor()
+            component = PassTransistor(tech=tech, p_cell=int(args.pcell))
             component.generate()
         case LDOComponentType.OTA.value:
             component = OTA()

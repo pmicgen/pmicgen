@@ -24,7 +24,11 @@ def pnpoly_matrix(columns: int, rows: int) -> gf.Component:
     ref.connect(port=ref.ports["top_1_1"], destination=ref.ports["bot_1_1"])
     return ccm
 
-c: gf.Component = pnpoly_matrix(10, 5)
-c.write_gds("build/pnpoly.gds", with_metadata=True)
-print(c)
-c.show(show_ports=True, show_subports=True, with_metadata=True)
+def main():
+    c: gf.Component = pnpoly_matrix(10, 5)
+    c.write_gds("build/pnpoly.gds", with_metadata=True)
+    print(c)
+    c.show(show_ports=True, show_subports=True, with_metadata=True)
+
+if __name__ == "__main__":
+    main()

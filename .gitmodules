@@ -1,3 +1,4 @@
 [submodule "cca"]
 	path = automation/thirdparty/cca
 	url = https://github.com/Mario1159/Common_Centroid_Algorithm
+	branch = main

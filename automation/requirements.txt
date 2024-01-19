@@ -1,8 +1,9 @@
 argparse==1.4.0
 klayout==0.28.14
-sky130==0.9.0
 volare==0.15.2
-gdsfactory==7.8.17
+sky130 @ git+https://github.com/Mario1159/skywater130
+gdsfactory @ git+https://github.com/Mario1159/gdsfactory
 matplotlib==3.8.2
 numpy==1.26.3
 astar==0.99
+timy==0.4.2

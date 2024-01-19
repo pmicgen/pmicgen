@@ -3,6 +3,7 @@ from pathlib import Path
 from dataclasses import dataclass
 
 class PDK(Enum):
+    GENERIC = "generic"
     SKY130A = "sky130A"
     GF180MCUD = "gf180mcuD"
 

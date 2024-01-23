@@ -16,10 +16,11 @@ match ENV_GF_PDK:
         pdk = get_generic_pdk()
 pdk.activate()
 
-from .ccres import *
+from .typings import *
 
 match ENV_GF_PDK:
     case "sky130":
         from .sky130_ccres import *
     case "generic":
+        from .generic_ccres_routing_a import *
         from .generic_ccres import *

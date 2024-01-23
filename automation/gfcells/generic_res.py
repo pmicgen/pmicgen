@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from gfcells import *
 
+import gdsfactory as gf
 
 @gf.cell
 def resistor(

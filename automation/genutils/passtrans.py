@@ -2,6 +2,8 @@ from .component import *
 import pathlib
 import subprocess
 import sys
+import os
+
 
 class PMOSWaffle(LDOComponent):
     p_cell: int
@@ -14,9 +16,7 @@ class PMOSWaffle(LDOComponent):
         return f"{pathlib.Path(__file__).parent.parent.resolve()}/magic/moswaffle"
 
     def _update_tcl_file(self) -> None:
-        pmos_tcl = open(
-            f"{PMOSWaffle._waffle_folder()}/waffles_pmos.tcl", "r"
-        )
+        pmos_tcl = open(f"{PMOSWaffle._waffle_folder()}/waffles_pmos.tcl", "r")
         pmos_data = []
 
         for line in pmos_tcl:
@@ -59,17 +59,23 @@ class PMOSWaffle(LDOComponent):
         pmos_tcl.close()
 
     """TODO: Fix process run"""
+
     def generate(self):
         self._update_tcl_file()
         proc = subprocess.run(
             [
-                "/bin/magic",
+                "magic",
                 "-dnull",
-                "-dnoconsole",
+                "-noconsole",
                 f"-rcfile {self.tech.magicrc_path()}",
                 f"{PMOSWaffle._waffle_folder()}/waffles_pmos.tcl",
             ],
             cwd=PMOSWaffle._waffle_folder(),
+            env=os.environ.copy(),
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=False,
         )
         print(proc)
 
@@ -77,6 +83,8 @@ class PMOSWaffle(LDOComponent):
 PassTransistor = PMOSWaffle
 
 """TODO: Finalize NMOS variant"""
+
+
 class NMOSWaffle(LDOComponent):
     def generate(self):
         nmos_tcl = open("input_files/mag_files/waffles_nmos.tcl", "r")

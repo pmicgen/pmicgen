@@ -2,3 +2,9 @@
 	path = automation/thirdparty/cca
 	url = https://github.com/Mario1159/Common_Centroid_Algorithm
 	branch = main
+[submodule "bgr"]
+	path = automation/thirdparty/bgr
+	url = https://github.com/johnkustin/bandgapReferenceCircuit
+[submodule "align-sky130"]
+	path = automation/thirdparty/align-sky130
+	url = https://github.com/ALIGN-analoglayout/ALIGN-pdk-sky130

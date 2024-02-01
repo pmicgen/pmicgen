@@ -24,3 +24,4 @@ match ENV_GF_PDK:
     case "generic":
         from .generic_ccres_routing_a import *
         from .generic_ccres import *
+        from .route_solver import *

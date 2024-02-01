@@ -1,5 +1,7 @@
 all: clean build run
 
+.PHONY: all build
+
 clean:
 	@if [ "$$(docker inspect -f '{{.State.Running}}' ldo_cac_jupyter)" == "true" ]; then\
 		docker stop ldo_cac_jupyter;\

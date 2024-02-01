@@ -200,7 +200,7 @@ class Layer:
 
 @dataclass
 class Port:
-    name: st
+    name: str
     position: LayoutCoord
 
 @dataclass

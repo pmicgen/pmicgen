@@ -6,5 +6,5 @@ from .component import TechManager
 from .ota import OTA
 from .ccres import CCResistor
 from .passtrans import PassTransistor
-from .bandgap import Bandgap
+from .bgr import BGR
 from .ldo import LDO

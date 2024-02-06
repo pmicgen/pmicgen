@@ -4,7 +4,7 @@
 	branch = main
 [submodule "bgr"]
 	path = automation/thirdparty/bgr
-	url = https://github.com/johnkustin/bandgapReferenceCircuit
+	url = https://github.com/Mario1159/bandgapReferenceCircuit
 	branch = main
 [submodule "align-sky130"]
 	path = automation/thirdparty/align-sky130

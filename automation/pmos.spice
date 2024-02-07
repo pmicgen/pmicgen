@@ -1,0 +1,44 @@
+** sch_path: /foss/designs/pmos.sch
+**.subckt pmos
+G2 v2 v1 v2 v1 10
+R4 v1 v2 10 m=1
+G1 v2 v4 v6 v4 10
+R1 v2 v4 10 m=1
+G3 v3 v1 v2 v1 10
+R2 v1 v3 10 m=1
+G4 v3 v4 v5 v4 10
+R3 v3 v4 10 m=1
+G5 v4 GND v8 v7 10
+R5 v4 GND 10 m=1
+G6 v8 GND v8 v7 10
+R6 v8 GND 10 m=1
+I0 GND v8 0.001
+**** begin user architecture code
+
+
+.lib /foss/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+vdd v1 0 1 AC 1
+vref v6 0 1
+vfb v5 0 1
+
+*.control
+*ac dec 200 10 100G
+*plot vdb(v2)
+*let phase_val = 180/PI*cph(v2)
+*let phase_margin_val = 180 + 180/PI*cph(v2)
+*settype phase phase_val
+*plot phase_val
+*.endc
+
+.control
+tran 1n 100n
+plot v(v1) v(v2)
+.endc
+
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.end

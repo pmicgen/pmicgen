@@ -21,20 +21,19 @@ class TestRouteSolver(unittest.TestCase):
                 router.add_route_line(
                     index=i, direction=gfcells.MatrixDirection2D.Column
                 )
-                """
+                
                 router.add_route_line(
                     index=i, direction=gfcells.MatrixDirection2D.Column
                 )
                 router.add_route_line(
                     index=i, direction=gfcells.MatrixDirection2D.Column
                 )
-                """
+                
             for j in range(router.number_of_cell_rows - 1):
                 router.add_route_line(index=j, direction=gfcells.MatrixDirection2D.Row)
-                """
                 router.add_route_line(index=j, direction=gfcells.MatrixDirection2D.Row)
                 router.add_route_line(index=j, direction=gfcells.MatrixDirection2D.Row)
-                """
+                
             # router.add_route_line(index=0, direction=gfcells.MatrixDirection2D.Column)
             # router.add_route_line(index=1, direction=gfcells.MatrixDirection2D.Column)
             print(pd.DataFrame(router.routing_map().rows))

@@ -4,14 +4,23 @@ import sky130.components as sc
 import sky130.tech as st
 import sky130.pcells as pc
 
+from .routing_a import routing_a
+from .generic_ccres import empty_cell_matrix, get_cell_types, common_centroid_resistor, MatrixCellRouter
+
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import genutils
+
 import math
 
 
 @gf.cell
-def pnpoly_matrix(columns: int, rows: int) -> gf.Component:
-    ccm = gf.Component("CommonCentroidMatrix")
-    p_poly_width = 0.35
-    p_poly_length = 0.5
+def resistor(w: float = 0.35, h: float = 0.5) -> gf.Component:
+    res = gf.Component("sky130_unit_resistor")
+    p_poly_width = w
+    p_poly_length = h
     contact_size: gf.typings.Float2 = (0.17, 0.17)
     contact_spacing: gf.typings.Float2 = (0.17, 0.17)
     licon_slots_size = (0.19, 2)
@@ -72,42 +81,33 @@ def pnpoly_matrix(columns: int, rows: int) -> gf.Component:
     space_between_cells = (0.5, 0.5)
     spacing = pnpoly.size + space_between_cells
 
-    ref: gf.ComponentReference = ccm.add_ref(
-        gf.components.array(
-            component=pnpoly, spacing=spacing, columns=columns, rows=rows
-        )
+    return res
+
+
+def sky130_common_centroid_resistor(
+    element_count: int = 15, ratio: float = 0.4, row_number: int = 5, routing_fn = routing_a
+) -> gf.Component:
+    genutils.CCResistor(tech=genutils.TechManager(genutils.PDK(genutils.PDK.SKY130A)))
+    ccm = genutils.ccres.CommonCentroidMatrix(
+        element_count=element_count, ratio=ratio, row_number=row_number
     )
-
-    return ccm
-
-
-def connect_cells(
-    ref: gf.ComponentReference, c1: gf.typings.Float2, c2: gf.typings.Float2
-):
-    mcas: gf.cross_section.MultiCrossSectionAngleSpec() = (
-        (st.xs_metal1, (0, 180)),
-        (st.xs_metal1, (90, 270)),
+    label_matrix: list[list[str]] = ccm.cells_repr()
+    routing_matrix: gf.Component = gf.Component("ccres")
+    non_routed_matrix = empty_cell_matrix(
+        label_matrix=label_matrix,
+        components=get_cell_types(label_matrix, resistor=resistor()),
+        resistor=resistor(),
     )
-    via: gf.Component = pc.via_generator()
-
-    via.info["size"] = via.to_dict()["settings"]["full"]["via_size"]
-    via.info["enclosure"] = via.to_dict()["settings"]["full"]["via_enclosure"][0]
-    via.info["spacing"] = via.to_dict()["settings"]["full"]["via_spacing"]
-
-    via_corner: gf.Component = gf.components.via_corner(mcas, (via, via), ("m1", "m2"))
-    print(via_corner.ports)
-    """
-    route = gf.routing.get_route_electrical(
-        ref.ports[f"top_{c1[1]}_{c1[0]}"],
-        ref.ports[f"bot_{c2[1]}_{c2[0]}"],
-        bend=via_corner,
-        cross_section=st.xs_metal1,
+    matrix: gf.Component = common_centroid_resistor(
+        MatrixCellRouter(
+            non_routed_matrix=non_routed_matrix,
+            routing_matrix=routing_matrix,
+            label_matrix=label_matrix,
+            resistor=pc.p_n_poly(),
+            cell_to_pad_enclosure_height=resistor().to_dict()["settings"]["enclosure"][
+                1
+            ],
+        ),
+        routing_fn=routing_fn,
     )
-
-    ref.parent.add(route.references)
-    """
-    port_top: gf.typings.Port = ref.ports[f"top_{c1[1]}_{c1[0]}"]
-    port_bot: gf.typings.Port = ref.ports[f"bot_{c2[1]}_{c2[0]}"]
-    route = gf.routing.get_route_electrical_multilayer(port_top, port_bot)
-
-    ref.parent.add(route.references)
+    return matrix

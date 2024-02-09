@@ -201,7 +201,6 @@ class RouteSolver(AStar):
         self._target_dest = dest
 
         path: list[RoutingCoord] = list(self.astar(orig, dest))
-        print(path)
         for i, current_point in enumerate(path):
             if i > 0:
                 previous_point = path[i - 1]

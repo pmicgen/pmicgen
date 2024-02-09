@@ -2,6 +2,7 @@
 
 [![https://github.com/Mario1159/LDO_CAC/blob/main/automation/ldo.ipynb](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mario1159/LDO_CAC/blob/main/automation/ldo.ipynb)
 
+> To access the main jupyter in google colab, enable private access in [Colab](https://colab.research.google.com/) > Configuration > Github > Private repository access
 
 Automated generation of an LDO for SKY130
 

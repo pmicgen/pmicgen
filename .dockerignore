@@ -1,1 +1,3 @@
 __pycache__/
+pmicgen.egg-info/
+.env

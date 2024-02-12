@@ -104,9 +104,7 @@ def sky130_common_centroid_resistor(
             routing_matrix=routing_matrix,
             label_matrix=label_matrix,
             resistor=pc.p_n_poly(),
-            cell_to_pad_enclosure_height=resistor().to_dict()["settings"]["enclosure"][
-                1
-            ],
+            cell_to_pad_enclosure_height=10,
         ),
         routing_fn=routing_fn,
     )

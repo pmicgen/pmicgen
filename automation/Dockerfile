@@ -21,6 +21,7 @@ RUN "${CONDA_DIR}/envs/${env_name}/bin/pip" install --no-cache-dir --requirement
     fix-permissions "/home/${NB_USER}"
 
 USER root
+# TODO: For some reason vscode is not detecting the kernel, can be a path issue
 RUN \
     echo conda activate "${env_name}" >> /usr/local/bin/before-notebook.d/10activate-conda-env.sh && \
     echo conda activate "${env_name}" >> /etc/skel/.bashrc && \
@@ -31,10 +32,9 @@ RUN jupyter kernelspec remove -y python3
 
 USER jovyan
 
-# TODO: Fix this absolute path
 RUN "/opt/conda/envs/${env_name}/bin/volare" enable $("/opt/conda/envs/${env_name}/bin/volare" ls-remote | sed -n '1 p')
 
-COPY --chown=jovyan:jovyan . .
+COPY --chown=jovyan:users . .
 
 # TODO: Non root access (change default user to jovyan)
 CMD ["jupyter", "notebook", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''", "--KernelSpecManager.ensure_native_kernel=False", "--NotebookApp.allow_origin='*'", "--NotebookApp.ip='0.0.0.0'"]

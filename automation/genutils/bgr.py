@@ -2,27 +2,36 @@ from .component import *
 
 import subprocess
 import os
-
+from pathlib import Path
 
 class BGR(LDOComponent):
     def __init__(self, tech: TechManager):
         super().__init__(tech)
 
     def generate(self):
-        proc = subprocess.run(
+        if "PDK_ROOT" not in os.environ:
+            username = os.getenv('USER')
+            pdk_root = f"/home/{username}/.volare"
+            os.environ["PDK_ROOT"] = pdk_root
+        proc = subprocess.Popen(
             [
-                "magic",
-                "-dnull",
-                "-noconsole",
-                f"-rcfile {self.tech.magicrc_path()}",
-                f"automation/thirdparty/bgr/layout/bandgaptop_hybrid_hier.mag",
-            ],
-            cwd=".",
-            env=os.environ.copy(),
-            input="gds write bgr",
-            text=True,
+                'magic',
+                '-dnull',
+                '-noconsole',
+                "-rcfile",
+                self.tech.magicrc_path(),
+                "automation/thirdparty/bgr/layout/bandgaptop_hybrid_hier.mag",
+		    ],
+            stdin = subprocess.PIPE,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=False,
-        )
+		    stderr=subprocess.STDOUT,
+            cwd = ".",
+            env=os.environ,
+		    universal_newlines = True)
+        
+        path = Path('build/bgr/gds')
+        path.mkdir(parents=True, exist_ok=True)
+        
+        proc.stdin.write("gds write build/bgr/gds/bgr.gds\n")
+        proc.stdin.write("quit -noprompt\n")
 

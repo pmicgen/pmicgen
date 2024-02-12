@@ -10,7 +10,7 @@ import gdsfactory as gf
 
 class TestEmptyCellMatrix(unittest.TestCase):
     def test_instance_with_defaults(self):
-        bgr = gfcells.bgr()
+        ota = gfcells.ota()
 
 if __name__ == "__main__":
     unittest.main()

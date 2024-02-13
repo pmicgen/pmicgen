@@ -20,7 +20,7 @@ def main():
     parser_pmosw.add_argument("pcell")
 
     parser_ota = subparsers.add_parser(LDOComponentType.OTA.value)
-    parser_ota.add_argument("")
+    parser_ota.add_argument("--netlist")
 
     parser_ccr = subparsers.add_parser(LDOComponentType.CCRESISTOR.value)
     parser_ccr.add_argument(["--columns", "-m"])

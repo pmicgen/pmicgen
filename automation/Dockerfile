@@ -6,6 +6,7 @@ ARG py_ver=3.10
 USER root
 RUN apt update -y
 RUN apt upgrade -y
+RUN rm -r /home/jovyan/work
 
 # Add sudo rights to jovyan
 RUN usermod -aG sudo jovyan
@@ -32,7 +33,6 @@ RUN "${CONDA_DIR}/envs/${env_name}/bin/pip" install --no-cache-dir --requirement
     fix-permissions "/home/${NB_USER}"
 
 USER root
-# TODO: For some reason vscode is not detecting the kernel, can be a path issue
 RUN \
     echo conda activate "${env_name}" >> /usr/local/bin/before-notebook.d/10activate-conda-env.sh && \
     echo conda activate "${env_name}" >> /etc/skel/.bashrc && \
@@ -45,6 +45,10 @@ USER jovyan
 RUN "/opt/conda/envs/${env_name}/bin/volare" enable $("/opt/conda/envs/${env_name}/bin/volare" ls-remote | sed -n '1 p')
 
 COPY --chown=jovyan:users . .
+
+# Set up Git LFS
+RUN sudo apt install git-lfs
+RUN git lfs update --force
 
 RUN chmod +x "/home/jovyan/automation/docker/cmd.sh"
 CMD ["/home/jovyan/automation/docker/cmd.sh"]

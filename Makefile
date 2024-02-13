@@ -3,7 +3,7 @@ all: clean build run
 .PHONY: all build
 
 clean:
-	-docker rm ldo_cac_jupyter
+	-docker rm -f ldo_cac_jupyter
 
 build:
 	docker build -f automation/Dockerfile -t ldo_cac .

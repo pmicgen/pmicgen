@@ -1,5 +1,4 @@
 argparse==1.4.0
-klayout==0.28.14
 volare==0.15.2
 sky130 @ git+https://github.com/Mario1159/skywater130
 gdsfactory @ git+https://github.com/Mario1159/gdsfactory

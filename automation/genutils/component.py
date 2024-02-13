@@ -18,10 +18,10 @@ class TechManager():
         return f"{self.pdk_root_path()}/libs.tech/magic/{self.pdk.value}.magicrc"
 
 class LDOComponentType(Enum):
-    PASS_TRANSISTOR = "pass-transistor"
+    PMOS_WAFFLE = "pmosw"
     OTA = "ota"
     CCRESISTOR = "ccres"
-    BANDGAP =  "bandgap"
+    BGR =  "bgr"
     LDO = "ldo"
 
     def __str__(self):

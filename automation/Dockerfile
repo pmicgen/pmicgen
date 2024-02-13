@@ -3,6 +3,17 @@ FROM jupyter/minimal-notebook
 ARG env_name=pyicenv
 ARG py_ver=3.10
 
+USER root
+RUN apt update -y
+RUN apt upgrade -y
+
+# Add sudo rights to jovyan
+RUN usermod -aG sudo jovyan
+RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jovyan-nopasswd
+
+USER jovyan
+ENV PATH="/home/jovyan/.local/bin:${PATH}"
+
 COPY --chown=${NB_UID}:${NB_GID} automation/environment.yml /tmp/
 RUN mamba env create -p "${CONDA_DIR}/envs/${env_name}" -f /tmp/environment.yml && \
      mamba clean --all -f -y
@@ -11,7 +22,7 @@ RUN mamba env create -p "${CONDA_DIR}/envs/${env_name}" -f /tmp/environment.yml 
 # https://discourse.jupyter.org/t/what-should-i-do-about-frozen-modules-warning/21528
 ENV PYDEVD_DISABLE_FILE_VALIDATION=1
 
-RUN "${CONDA_DIR}/envs/${env_name}/bin/python" -m ipykernel install --user --name="${env_name}" && \
+RUN "${CONDA_DIR}/envs/${env_name}/bin/python" -m ipykernel install --user --name="${env_name}" --display-name "Python IC Development" && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
@@ -31,10 +42,9 @@ RUN \
 RUN jupyter kernelspec remove -y python3
 
 USER jovyan
-
 RUN "/opt/conda/envs/${env_name}/bin/volare" enable $("/opt/conda/envs/${env_name}/bin/volare" ls-remote | sed -n '1 p')
 
 COPY --chown=jovyan:users . .
 
-# TODO: Non root access (change default user to jovyan)
-CMD ["jupyter", "notebook", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''", "--KernelSpecManager.ensure_native_kernel=False", "--NotebookApp.allow_origin='*'", "--NotebookApp.ip='0.0.0.0'"]
+RUN chmod +x "/home/jovyan/automation/docker/cmd.sh"
+CMD ["/home/jovyan/automation/docker/cmd.sh"]

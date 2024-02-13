@@ -9,11 +9,11 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="LDO CAC",
-        description="Automated generation of an LDO for SKY130",
+        prog="pmicgen",
+        description="Automated generation of an PMIC for SKY130",
         epilog="AC3E 2024",
     )
-    parser.add_argument("pdk", type=PDK, choices=list(PDK))
+    parser.add_argument("--tech", type=PDK, choices=list(PDK))
     subparsers = parser.add_subparsers(dest="component")
 
     parser_pmosw = subparsers.add_parser(LDOComponentType.PMOS_WAFFLE.value)

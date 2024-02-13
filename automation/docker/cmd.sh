@@ -1,10 +1,12 @@
 #!/bin/bash
 
+mkdir .logs
+
 jupyter notebook --no-browser \
     --NotebookApp.password='' \
     --KernelSpecManager.ensure_native_kernel=False \
     --NotebookApp.allow_origin='*' \
-    --NotebookApp.ip='0.0.0.0' > jupyter_logs.txt 2>&1 &
+    --NotebookApp.ip='0.0.0.0' > .logs/jupyter.txt 2>&1 &
 
 # Loop until the server is up
 while true; do

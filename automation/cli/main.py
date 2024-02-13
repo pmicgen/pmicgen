@@ -23,8 +23,8 @@ def main():
     parser_ota.add_argument("--netlist")
 
     parser_ccr = subparsers.add_parser(LDOComponentType.CCRESISTOR.value)
-    parser_ccr.add_argument(["--columns", "-m"])
-    parser_ccr.add_argument(["--rows", "-n"])
+    parser_ccr.add_argument("--columns", "-m")
+    parser_ccr.add_argument("--rows", "-n")
     parser_ccr.add_argument("rwidth")
     parser_ccr.add_argument("rlength")
 
@@ -33,7 +33,7 @@ def main():
     args = parser.parse_args()
     tech = TechManager(args.pdk)
     match str(args.component):
-        case LDOComponentType.PASS_TRANSISTOR.value:
+        case LDOComponentType.PMOS_WAFFLE.value:
             component = PassTransistor(tech=tech, p_cell=int(args.pcell))
             component.generate()
         case LDOComponentType.OTA.value:
@@ -42,7 +42,7 @@ def main():
         case LDOComponentType.CCRESISTOR.value:
             component = CCResistor()
             component.generate()
-        case LDOComponentType.BANDGAP.value:
+        case LDOComponentType.BGR.value:
             component = BGR(tech=tech)
             component.generate()
         case LDOComponentType.LDO.value:

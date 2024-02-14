@@ -6,6 +6,7 @@ import sky130.pcells as pc
 
 from .routing_a import routing_a
 from .generic_ccres import empty_cell_matrix, get_cell_types, common_centroid_resistor, MatrixCellRouter
+from .sky130_res import sky130_resistor
 
 import sys
 import os
@@ -95,7 +96,7 @@ def sky130_common_centroid_resistor(
     routing_matrix: gf.Component = gf.Component("ccres")
     non_routed_matrix = empty_cell_matrix(
         label_matrix=label_matrix,
-        components=get_cell_types(label_matrix, resistor=resistor()),
+        components=get_cell_types(label_matrix, resistor=sky130_resistor()),
         resistor=resistor(),
     )
     matrix: gf.Component = common_centroid_resistor(
@@ -103,7 +104,7 @@ def sky130_common_centroid_resistor(
             non_routed_matrix=non_routed_matrix,
             routing_matrix=routing_matrix,
             label_matrix=label_matrix,
-            resistor=pc.p_n_poly(),
+            resistor=sky130_resistor(),
             cell_to_pad_enclosure_height=10,
         ),
         routing_fn=routing_fn,

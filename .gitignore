@@ -3,3 +3,5 @@ build/
 *.ext
 pmicgen.egg-info/
 .logs
+Pipfile
+Pipfile.lock

@@ -5,7 +5,6 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import gdsfactory as gf
-import genutils
 
 
 class CCATest(unittest.TestCase):

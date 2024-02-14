@@ -14,5 +14,5 @@ def sky130_bgr() -> gf.Component:
     tech = genutils.TechManager(genutils.PDK.SKY130A)
     ota_gen = genutils.OTA(tech)
     ota_gen.generate()
-    ota_comp : gf.Component = gf.read.import_gds("build/ota/gds/ota.gds")
+    ota_comp : gf.Component = gf.read.import_gds("build/sky130_ota/gds/ota.gds")
     ota_comp.show()

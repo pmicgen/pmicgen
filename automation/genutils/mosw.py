@@ -8,8 +8,10 @@ import os
 class PMOSWaffle(LDOComponent):
     p_cell: int
 
-    def __init__(self, tech: TechManager, p_cell: int) -> None:
+    def __init__(self, tech: TechManager, mult: int) -> None:
         super().__init__(tech)
+        p_cells = {4512:48,1300:32,480:28}
+        p_cell = p_cells[mult]
         self.p_cell = p_cell
 
     def _waffle_folder() -> str:

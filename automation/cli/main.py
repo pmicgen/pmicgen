@@ -17,7 +17,7 @@ def main():
     subparsers = parser.add_subparsers(dest="component")
 
     parser_pmosw = subparsers.add_parser(LDOComponentType.PMOS_WAFFLE.value)
-    parser_pmosw.add_argument("pcell")
+    parser_pmosw.add_argument("mult")
 
     parser_ota = subparsers.add_parser(LDOComponentType.OTA.value)
     parser_ota.add_argument("--netlist")
@@ -34,20 +34,24 @@ def main():
     tech = TechManager(args.tech)
     match str(args.component):
         case LDOComponentType.PMOS_WAFFLE.value:
-            component = PMOSWaffle(tech=tech, p_cell=int(args.pcell))
+            component = PMOSWaffle(tech=tech, mult=int(args.mult))
             component.generate()
         case LDOComponentType.OTA.value:
-            component = OTA()
+            component = OTA(tech=tech, netlist=str(args.netlist)
             component.generate()
         case LDOComponentType.CCRESISTOR.value:
-            component = CCResistor()
+            component = CCResistor(tech=tech, columns=int(columns), rows=int(rows))
             component.generate()
         case LDOComponentType.BGR.value:
             component = BGR(tech=tech)
             component.generate()
         case LDOComponentType.LDO.value:
-            component = LDO()
+            component = LDO(tech=tech)
             component.generate()
+        case "ldo_specs":
+            pass
+        case "pmic_specs":
+            pass
         case _:
             raise argparse.ArgumentTypeError(f"Invalid component: {args.component}")
 

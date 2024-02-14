@@ -8,8 +8,9 @@ class OTA(LDOComponent):
 
     schematic_path: os.PathLike
 
-    def __init__(self, tech: TechManager, schematic_path: os.PathLike):
+    def __init__(self, tech: TechManager, netlist: os.PathLike):
         super().__init__(tech)
+        self.netlist = netlist
 
     def generate(self):
         client = docker.from_env()

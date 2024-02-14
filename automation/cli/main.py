@@ -31,10 +31,10 @@ def main():
     subparsers.add_parser(LDOComponentType.BGR.value)
 
     args = parser.parse_args()
-    tech = TechManager(args.pdk)
+    tech = TechManager(args.tech)
     match str(args.component):
         case LDOComponentType.PMOS_WAFFLE.value:
-            component = PassTransistor(tech=tech, p_cell=int(args.pcell))
+            component = PMOSWaffle(tech=tech, p_cell=int(args.pcell))
             component.generate()
         case LDOComponentType.OTA.value:
             component = OTA()

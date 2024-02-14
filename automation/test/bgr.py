@@ -8,8 +8,8 @@ import gdsfactory as gf
 
 class TestEmptyCellMatrix(unittest.TestCase):
     def test_instance_with_defaults(self):
-        import gfcells.sky130
-        bgr : gf.Component = gfcells.sky130_bgr()
+        import gfcells.sky130 as gfc
+        bgr : gf.Component = gfc.sky130_bgr()
         bgr.show()
 
 if __name__ == "__main__":

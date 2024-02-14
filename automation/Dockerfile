@@ -14,6 +14,7 @@ RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jovyan-nopasswd
 
 USER jovyan
 ENV PATH="/home/jovyan/.local/bin:${PATH}"
+ENV PATH="/opt/conda/envs/pyicenv/bin:${PATH}"
 
 COPY --chown=${NB_UID}:${NB_GID} automation/environment.yml /tmp/
 RUN mamba env create -p "${CONDA_DIR}/envs/${env_name}" -f /tmp/environment.yml && \
@@ -25,18 +26,18 @@ ENV PYDEVD_DISABLE_FILE_VALIDATION=1
 
 RUN "${CONDA_DIR}/envs/${env_name}/bin/python" -m ipykernel install --user --name="${env_name}" --display-name "Python IC Development" && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+    fix-permissions "/home/jovyan"
 
 COPY --chown=${NB_UID}:${NB_GID} automation/requirements.txt /tmp/
 RUN "${CONDA_DIR}/envs/${env_name}/bin/pip" install --no-cache-dir --requirement /tmp/requirements.txt && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+    fix-permissions "/home/jovyan"
 
 USER root
 RUN \
     echo conda activate "${env_name}" >> /usr/local/bin/before-notebook.d/10activate-conda-env.sh && \
     echo conda activate "${env_name}" >> /etc/skel/.bashrc && \
-    echo conda activate "${env_name}" >> "/home/${NB_USER}/.bashrc"
+    echo conda activate "${env_name}" >> "/home/jovyan/.bashrc"
 
 # Remove previous default kernel
 RUN jupyter kernelspec remove -y python3

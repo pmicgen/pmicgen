@@ -23,6 +23,7 @@ from .typings import *
 match ENV_GF_PDK:
     case "sky130":
         from .sky130_ccres import *
+        from .bgr import *
     case "generic":
         from .routing_a import *
         from .generic_ccres import *

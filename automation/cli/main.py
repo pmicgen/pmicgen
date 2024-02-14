@@ -17,7 +17,7 @@ def main():
     subparsers = parser.add_subparsers(dest="component")
 
     parser_pmosw = subparsers.add_parser(LDOComponentType.PMOS_WAFFLE.value)
-    parser_pmosw.add_argument("mult")
+    parser_pmosw.add_argument("--mult")
 
     parser_ota = subparsers.add_parser(LDOComponentType.OTA.value)
     parser_ota.add_argument("--netlist")

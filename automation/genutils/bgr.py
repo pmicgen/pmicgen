@@ -29,7 +29,7 @@ class BGR(LDOComponent):
             env=os.environ,
 		    universal_newlines = True)
         
-        path = Path('build/bgr/gds')
+        path = Path('build/sky130_bgr/gds')
         path.mkdir(parents=True, exist_ok=True)
         
         proc.stdin.write("gds write build/sky130_bgr/gds/bgr.gds\n")

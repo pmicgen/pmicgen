@@ -10,11 +10,7 @@ class PMOSWaffle(LDOComponent):
 
     def __init__(self, tech: TechManager, mult: int) -> None:
         super().__init__(tech)
-<<<<<<< HEAD
-        p_cells = {4512:48,1300:32,480:28}
-=======
         p_cells = {4512: 48, 1300: 32, 480: 28}
->>>>>>> bfe352d257fa1c1abd1614852a9f64087dae932d
         p_cell = p_cells[mult]
         self.p_cell = p_cell
 

@@ -23,6 +23,6 @@ class LDOSpecToParam(LDOComponent):
             }
         }
         
-        with open('data.yml', 'w') as outfile:
+        with open('build/sky130_ldo/params.yml', 'w') as outfile:
             yaml.dump(specs, outfile, default_flow_style=False)
         

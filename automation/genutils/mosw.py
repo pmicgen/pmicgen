@@ -8,8 +8,10 @@ import os
 class PMOSWaffle(LDOComponent):
     p_cell: int
 
-    def __init__(self, tech: TechManager, p_cell: int) -> None:
+    def __init__(self, tech: TechManager, mult: int) -> None:
         super().__init__(tech)
+        p_cells = {4512: 48, 1300: 32, 480: 28}
+        p_cell = p_cells[mult]
         self.p_cell = p_cell
 
     def _waffle_folder() -> str:
@@ -58,10 +60,9 @@ class PMOSWaffle(LDOComponent):
             pmos_tcl.write(line)
         pmos_tcl.close()
 
-    """TODO: Fix process run"""
-
     def generate(self):
         self._update_tcl_file()
+        """
         proc = subprocess.run(
             [
                 "magic",
@@ -76,8 +77,30 @@ class PMOSWaffle(LDOComponent):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=False,
+        )"""
+
+        proc = subprocess.Popen(
+            [
+                "magic",
+                "-dnull",
+                "-noconsole",
+                "-rcfile",
+                self.tech.magicrc_path(),
+                f"{PMOSWaffle._waffle_folder()}/waffles_pmos.tcl",
+            ],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            cwd=PMOSWaffle._waffle_folder(),
+            env=os.environ,
+            universal_newlines=True,
         )
-        print(proc)
+
+        path = Path("build/sky130_pmosw/gds")
+        path.mkdir(parents=True, exist_ok=True)
+
+        proc.stdin.write("gds write build/sky130_pmosw/gds/pmosw.gds\n")
+        proc.stdin.write("quit -noprompt\n")
 
 
 PassTransistor = PMOSWaffle

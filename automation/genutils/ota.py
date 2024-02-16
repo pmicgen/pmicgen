@@ -14,11 +14,20 @@ class OTA(LDOComponent):
 
     def generate(self):
         client = docker.from_env()
+        path = Path(self.netlist).as_posix()
         container = client.containers.run(
             "darpaalign/align-public:latest",
-            volumes={"automation/thirdparty/align-sky130": "/pdk/sky130"},
+            command=f"schematic2layout.py /pdk/sky130/examples/telescopic_ota -p /pdk/sky130/SKY130_PDK",
+            volumes={os.path.abspath("automation/thirdparty/align-sky130"): {'bind': '/pdk/sky130', 'mode': 'rw'}},
         )
-        container.exec_run(
-            f"schematic2layout.py {self.schematic_path.as_posix()} -p /pdk/sky130"
-        )
-        #container.get_archive()
+        stream, _ = container.get_archive("work/TELESCOPIC_OTA_0.gds")
+
+        # Destination path outside the container
+        destination_path = os.path.join(os.getcwd(), "TELESCOPIC_OTA_0.gds")
+        
+        # Extract the artifact from the stream and save it
+        with open(destination_path, "wb") as f_out:
+            shutil.copyfileobj(stream, f_out)
+        
+        # Remove the container
+        container.remove()

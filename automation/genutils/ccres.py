@@ -140,3 +140,22 @@ class CommonCentroidMatrix:
     def cells_repr(self) -> list[list[str]]:
         repr = [[cell.type for cell in row] for row in self.cell_matrix]
         return repr
+        
+    def generate_netlist(W, L, num_resistors_a, num_resistors_b):
+        netlist = ""
+        netlist += "* Common Centroid Resistor\n"
+        netlist += ".subckt common_centroid a1 a2 a3 b1 b2\n"
+    
+        # Generate a resistors in series for a
+        for i in range(1, num_resistors_a + 1):
+            netlist += f"Xra{i} in_a a{i} sky130_fd_pr__res_xhigh_po W={W} L={L}\n"
+        netlist += f"Xra{num_resistors_a + 1} a{num_resistors_a} out_a sky130_fd_pr__res_xhigh_po W={W} L={L}\n"
+    
+        # Generate b resistors in series for b
+        for i in range(1, num_resistors_b + 1):
+            netlist += f"Xres_b{i} in_b b{i} sky130_fd_pr__res_xhigh_po W={W} L={L}\n"
+        netlist += f"Xres_b{num_resistors_b + 1} b{num_resistors_b} out_b sky130_fd_pr__res_xhigh_po W={W} L={L}\n"
+    
+        netlist += ".ends common_centroid\n"
+        return netlist
+            

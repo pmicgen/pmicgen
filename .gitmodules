@@ -1,8 +1,6 @@
-[submodule "bgr"]
-	path = automation/thirdparty/bgr
+[submodule "thirdparty/bgr"]
+	path = thirdparty/bgr
 	url = https://github.com/Mario1159/bandgapReferenceCircuit
-	branch = main
-[submodule "align-sky130"]
-	path = automation/thirdparty/align-sky130
+[submodule "thirdparty/align-sky130"]
+	path = thirdparty/align-sky130
 	url = https://github.com/ALIGN-analoglayout/ALIGN-pdk-sky130
-	branch = main

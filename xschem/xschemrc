@@ -1,0 +1,2 @@
+source $env(PDK_ROOT)/$env(PDK)/libs.tech/xschem/xschemrc
+append XSCHEM_LIBRARY_PATH :$env(PWD)

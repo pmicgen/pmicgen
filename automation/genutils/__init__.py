@@ -5,6 +5,6 @@ from .component import TechManager
 
 from .ota import OTA
 from .ccres import CCResistor
-from .passtrans import PassTransistor
+from .mosw import PMOSWaffle
 from .bgr import BGR
 from .ldo import LDO

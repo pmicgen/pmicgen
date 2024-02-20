@@ -6,7 +6,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from thirdparty.cca.cc import *
+import cca
 
 from typing import *
 from dataclasses import dataclass
@@ -92,7 +92,7 @@ class CommonCentroidMatrix:
         element_list = a_list + b_list
 
         output_from_ca = np.array(
-            construction_algorithm_symmetry(
+            cca.construction_algorithm_symmetry(
                 element_list,
                 square_array=True,
                 orientation="hor",

@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 import genutils
 
 from .generic_res import resistor
-from .generic_ccres_routing_a import routing_a
+from .routing_a import routing_a
 from .typings import (
     MatrixDirection2D,
     CCResistorCellPort,
@@ -216,7 +216,7 @@ class MatrixCellRouter:
         resistor=resistor(),
         route_width=10,
         cell_to_pad_enclosure_height=20,
-        cell_to_route_spacing=20,
+        cell_to_route_spacing=5,
         horizontal_layer: gf.typings.Layer = "M1",
         vertical_layer: gf.typings.Layer = "M2",
         cell_port_map: list[list[Port | None]] = [["T"], ["B"]],
@@ -454,30 +454,54 @@ class MatrixCellRouter:
             return False
 
     def layout_map(self) -> list[list[float]]:
+        # TODO: Generalize float 2.0 in function of the port map
         component: gf.Component = self.resistor
-        
-        y: float = component.size[1] / 2.0
-        layout_matrix: list[list[float]] = []
-        for j, row in enumerate(self._routing_map[0].rows):
-            new_row: list[float] = []
-            spacing_y: float
+        port_sizes = [20.0, 250.0]
 
-            x: float = component.size[0] / 2.0
-            for i, column in enumerate(row):
-                spacing_x: float
-                if type(self.routing_map().rows[j][i]) == Cell:
-                    spacing_x = component.size[0]
-                    spacing_y = component.size[1]
+        x_spacing: list[float] = []
+        current_element_size: float = 0
+        previous_element_size: float = 0
+        for column in self.routing_map().rows[0]:
+            element = column
+            if type(element) == Cell:
+                current_element_size = component.size[0]
+            else:
+                current_element_size = self.routing_spacing_line_width
+            x_spacing.append(current_element_size / 2.0 + previous_element_size / 2.0)
+            previous_element_size = current_element_size
+
+        y_spacing: list[float] = []
+        previous_is_cell = False
+        current_element_size: float = 0
+        previous_element_size: float = 0
+        for row in self.routing_map().rows:
+            element = row[0]
+            if type(element) == Cell:
+                if not previous_is_cell:
+                    current_element_size = port_sizes[0]
+                    y_spacing.append(current_element_size + previous_element_size / 2.0)
+                    previous_element_size = current_element_size
                 else:
-                    # TODO: Generalize float 2.0 in function of the port map
-                    spacing_x = self.routing_spacing_line_width
-                    spacing_y = self.routing_spacing_line_width
-                    
-                new_row.append((x, y))
-                x += spacing_x
-            y += spacing_y
+                    current_element_size = port_sizes[1]
+                    y_spacing.append(current_element_size)
+                    previous_element_size = component.size[1] - (port_sizes[0] + port_sizes[1])
+                
+                previous_is_cell = True
+            else:
+                current_element_size = self.routing_spacing_line_width
+                if not previous_is_cell:
+                    y_spacing.append(current_element_size / 2.0 + previous_element_size / 2.0)
+                else:
+                    y_spacing.append(current_element_size / 2.0 + previous_element_size)
+                previous_element_size = current_element_size
+                previous_is_cell = False
 
-            layout_matrix.append(new_row)
+        x_accumulated = [sum(x_spacing[:i+1]) for i in range(len(x_spacing))]
+        y_accumulated = [sum(y_spacing[:i+1]) for i in range(len(y_spacing))]
+
+        layout_matrix: list[list[float]] = [[(x_accumulated[i], y_accumulated[j]) for i in range(len(x_accumulated))] for j in range(len(y_accumulated))]
+
+
         return layout_matrix
 
     @gf.cell
@@ -594,7 +618,7 @@ class MatrixCellRouter:
         self.target_dest = cell_dest.index
         
         layout_map = self.layout_map()
-        print(pd.DataFrame(layout_map))
+        #print(pd.DataFrame(layout_map))
 
         solver: RouteSolver = RouteSolver(
             self._routing_map,
@@ -616,6 +640,8 @@ class MatrixCellRouter:
             )
 
             self.routing_matrix.add(route.references)
+        else:
+            print("ERROR")
 
     def map_index_from_cell_to_routing(
         self, index: int, direction: MatrixDirection2D
@@ -676,7 +702,7 @@ class MatrixCellRouter:
 
                 if distance < min_distance:
                     min_distance = distance
-                    nearest_position = (i, j)
+                    nearest_position = (j, i)
 
         return nearest_position
 

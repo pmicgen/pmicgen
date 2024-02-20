@@ -1,13 +1,12 @@
-name: python311
+name: pyicenv
 channels:
   - litex-hub
   - conda-forge
   - defaults
 dependencies:
-  - python=3.11
+  - python
   - ipykernel
   - jupyterlab
   - ngspice
   - magic
   - netgen
-  - klayout

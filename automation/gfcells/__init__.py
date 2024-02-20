@@ -5,7 +5,9 @@ from gdsfactory.generic_tech import get_generic_pdk
 gf.CONF.display_type = "klayout"
 
 import os
-ENV_GF_PDK = os.getenv("GF_PDK")
+
+if not os.getenv("GF_PDK"):
+    ENV_GF_PDK = os.getenv("GF_PDK")
 if not ENV_GF_PDK:
     ENV_GF_PDK = "generic"
 
@@ -20,8 +22,8 @@ from .typings import *
 
 match ENV_GF_PDK:
     case "sky130":
-        from .sky130_ccres import *
+        from .sky130 import *
     case "generic":
-        from .generic_ccres_routing_a import *
+        from .routing_a import *
         from .generic_ccres import *
         from .route_solver import *

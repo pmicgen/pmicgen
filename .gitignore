@@ -1,3 +1,7 @@
 __pycache__/
 build/
 *.ext
+pmicgen.egg-info/
+.logs
+Pipfile
+Pipfile.lock

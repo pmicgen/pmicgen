@@ -339,7 +339,7 @@ class symbolic_mna():
                 if n2 != 0 and cn1 != 0:
                     self.G[n2-1,cn1-1] -= g
 
-        print(self.G)  # display the G matrix
+        #print(self.G)  # display the G matrix
 
     def __B_matrix(self):
         # generate the self.B Matrix
@@ -406,7 +406,7 @@ class symbolic_mna():
         # check source count
         if sn != self.i_unk:
             print('source number, sn={:d} not equal to self.i_unk={:d} in matrix self.B'.format(sn,self.i_unk))
-        print(self.B)   # display the B matrix
+        #print(self.B)   # display the B matrix
 
     def __find_vname(self, name):
         # need to walk through data frame and find these parameters
@@ -518,7 +518,7 @@ class symbolic_mna():
         if sn != self.i_unk:
             print('source number, sn={:d} not equal to self.i_unk={:d} in matrix self.C'.format(sn,self.i_unk))
 
-        print(self.C)   # display the C matrix
+        #print(self.C)   # display the C matrix
     
     def __D_matrix(self):
         # generate the self.D Matrix
@@ -569,14 +569,14 @@ class symbolic_mna():
                 self.D[ind2_index,ind1_index] += -s*sympify('M{:s}'.format(self.df.loc[i,'element'].lower()[1:]))  # -s*Mxx
 
         # display the The self.D matrix
-        print("D: ",self.D)
+        #print("D: ",self.D)
 
     def __V_matrix(self):
         # generate the V matrix
         for i in range(self.num_nodes):
             self.V[i] = sympify('v{:d}'.format(i+1))
 
-        print(self.V)  # display the V matrix
+        #print(self.V)  # display the V matrix
 
     def __J_matrix(self):
         # The J matrix is an m by 1 matrix, with one entry for each i_unk from a source
@@ -586,7 +586,7 @@ class symbolic_mna():
             # process all the unknown currents
             self.J[i] = sympify('I_{:s}'.format(self.df2.loc[i,'element']))
 
-        print("J: ", self.J)  # diplay the J matrix
+        #print("J: ", self.J)  # diplay the J matrix
 
     def __I_matrix(self):
         # generate the I matrix, current sources have n2 = arrow end of the element
@@ -603,7 +603,7 @@ class symbolic_mna():
                 if n2 != 0:
                     self.I[n2-1] += g
 
-        print("I: ", self.I)  # display the I matrix
+        #print("I: ", self.I)  # display the I matrix
 
     def __Ev_matrix(self):
         # generate the E matrix
@@ -615,15 +615,15 @@ class symbolic_mna():
                 self.Ev[sn] = sympify(self.df.loc[i,'element'])
                 sn += 1
 
-        print(self.Ev)   # display the E matrix
+        #print(self.Ev)   # display the E matrix
 
     def __Z_matrix(self):
         self.Z = self.I[:] + self.Ev[:]  # the + operator in python concatenates the lists
-        print("Z: ", self.Z)  # display the Z matrix
+        #print("Z: ", self.Z)  # display the Z matrix
 
     def __X_matrix(self):
         self.X = self.V[:] + self.J[:]  # the + operator in python concatenates the lists
-        print("X: ", self.X)  # display the X matrix
+        #print("X: ", self.X)  # display the X matrix
 
     def __A_matrix(self):
         n = self.num_nodes
@@ -649,7 +649,7 @@ class symbolic_mna():
                 self.A[n,i] = self.C[i]
             self.A[n,n] = self.D[0] # added 1/7/2024 while debugging source free circuit with one inductor
 
-        print("A: ", self.A)  # display the A matrix
+        #print("A: ", self.A)  # display the A matrix
 
     def numeric_A_matrix(self):
         equ = Eq(self.A*Matrix(self.X),Matrix(self.Z))

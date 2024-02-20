@@ -1,6 +1,6 @@
 import numpy as np
 from gmid.mosplot.parsers.ngspice_parser import NgspiceRawFileReader
-from ldo_small_signal_modeling import small_signal_model
+#from ldo_small_signal_modeling import small_signal_model
 import os
 
 class template_generator():
@@ -190,7 +190,7 @@ class ota_op():
         self.ota_netlist_path = ota_netlist_path
         self.ota_simulation_template_path = ota_simulation_template_path
 
-
+"""
 def test():
     ota_netlist_path = "automation\OTA1st_lvt_jm.spice"
     ota_simulation_template_path = "automation\ota_simulation_template.spice"
@@ -281,3 +281,4 @@ def test():
     f.write(f"\nR1 {nodes['IN_P']} {node_num} 100000\n")
     f.write(f"R2 0 {nodes['IN_P']} 200000\n")
     f.close()
+"""

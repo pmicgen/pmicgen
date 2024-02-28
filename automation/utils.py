@@ -16,15 +16,17 @@ def op_parser(template):
 
 def node_identification(template, Vdd="VDD", Vss="VSS", out="OUT", in_pos="IN_P", in_neg="IN_M"):
     nodes = {}
-    node_num = 3
+    node_num = 4
     for device in template.devices:
         for node in [device.d_node, device.s_node, device.g_node]:
-            if (node==Vss or node==in_neg) and node not in nodes:
-                nodes[node]=0                                       #Vss and in_neg set to ground
+            if (node==Vss) and node not in nodes:
+                nodes[node]=0                                  #Vss and in_neg set to ground
+            elif (node==in_neg) and node not in nodes:
+                nodes[node]=3   
             elif node==Vdd and node not in nodes:
                 nodes[node]=1
             elif node==out and node not in nodes:
-                nodes[node]=2
+                nodes[node]=2   
             elif node not in nodes:
                 nodes[node]=node_num
                 node_num+=1

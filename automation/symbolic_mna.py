@@ -651,7 +651,7 @@ class symbolic_mna():
 
         #print("A: ", self.A)  # display the A matrix
 
-    def numeric_A_matrix(self):
+    def mna_equation(self):
         equ = Eq(self.A*Matrix(self.X),Matrix(self.Z))
         return equ
     

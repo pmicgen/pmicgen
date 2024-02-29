@@ -140,11 +140,11 @@ class Exploration_Transistor():
         def __init__(self, model=None):
             self.model = model
 
-def pass_transistor_exploration(lookup_table, Vdd, Vreg, il, R1, R2, lengths, gmid_sweep):
+def pass_transistor_exploration(lookup_table, Vdd, Vreg, il, R1, R2, lengths, gmid_sweep, vgs_sweep):
     
     ## First create generic pmos mosfet, for this we should consider:
     ## 1. the vds value the drop voltage from vdd to vreg.
-    pt_lutable = LoadMosfet(lookup_table=lookup_table, mos="pmos", vsb=0, vds=-(Vdd-Vreg), vgs=(-1.8, -0.6, 0.1), lengths = lengths)
+    pt_lutable = LoadMosfet(lookup_table=lookup_table, mos="pmos", vsb=0, vds=-(Vdd-Vreg), vgs=vgs_sweep, lengths = lengths)
     
     ## Creacion de transistor
     pass_transistor = Exploration_Transistor()

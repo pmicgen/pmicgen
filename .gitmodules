@@ -1,9 +1,3 @@
-[submodule "thirdparty/bgr"]
-	path = thirdparty/bgr
-	url = https://github.com/Mario1159/bandgapReferenceCircuit
 [submodule "thirdparty/align-sky130"]
 	path = thirdparty/align-sky130
 	url = https://github.com/ALIGN-analoglayout/ALIGN-pdk-sky130
-[submodule "thirdparty/common-centroid-layout"]
-	path = thirdparty/common-centroid-layout
-	url = https://github.com/Mario1159/common-centroid-layout

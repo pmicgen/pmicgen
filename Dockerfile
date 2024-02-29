@@ -6,6 +6,7 @@ ARG py_ver=3.10
 USER root
 RUN apt update -y
 RUN apt upgrade -y
+RUN apt install -y build-essential libffi-dev libboost-all-dev lp-solve
 RUN rm -r /home/jovyan/work
 
 # Add sudo rights to jovyan
@@ -16,7 +17,7 @@ USER jovyan
 ENV PATH="/home/jovyan/.local/bin:${PATH}"
 ENV PATH="/opt/conda/envs/pyicenv/bin:${PATH}"
 
-COPY --chown=${NB_UID}:${NB_GID} automation/environment.yml /tmp/
+COPY --chown=${NB_UID}:${NB_GID} environment.yml /tmp/
 RUN mamba env create -p "${CONDA_DIR}/envs/${env_name}" -f /tmp/environment.yml && \
      mamba clean --all -f -y
 
@@ -28,28 +29,29 @@ RUN "${CONDA_DIR}/envs/${env_name}/bin/python" -m ipykernel install --user --nam
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/jovyan"
 
-COPY --chown=${NB_UID}:${NB_GID} automation/requirements.txt /tmp/
-RUN "${CONDA_DIR}/envs/${env_name}/bin/pip" install --no-cache-dir --requirement /tmp/requirements.txt && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/jovyan"
+COPY --chown=${NB_UID}:${NB_GID} requirements.txt /tmp/
+#RUN "${CONDA_DIR}/envs/${env_name}/bin/pip" install --no-cache-dir --requirement /tmp/requirements.txt && \
+#    fix-permissions "${CONDA_DIR}" && \
+#    fix-permissions "/home/jovyan"
 
-USER root
-RUN \
-    echo conda activate "${env_name}" >> /usr/local/bin/before-notebook.d/10activate-conda-env.sh && \
-    echo conda activate "${env_name}" >> /etc/skel/.bashrc && \
-    echo conda activate "${env_name}" >> "/home/jovyan/.bashrc"
+#USER root
+#RUN \
+#    echo conda activate "${env_name}" >> /usr/local/bin/before-notebook.d/10activate-conda-env.sh && \
+#    echo conda activate "${env_name}" >> /etc/skel/.bashrc && \
+#    echo conda activate "${env_name}" >> "/home/jovyan/.bashrc"
 
 # Remove previous default kernel
-RUN jupyter kernelspec remove -y python3
+#RUN jupyter kernelspec remove -y python3
 
-USER jovyan
-RUN "/opt/conda/envs/${env_name}/bin/volare" enable $("/opt/conda/envs/${env_name}/bin/volare" ls-remote | sed -n '1 p')
+#USER jovyan
+#RUN "/opt/conda/envs/${env_name}/bin/volare" enable $("/opt/conda/envs/${env_name}/bin/volare" ls-remote | sed -n '1 p')
 
-COPY --chown=jovyan:users . .
+#COPY --chown=jovyan:users . .
 
 # Set up Git LFS
-RUN sudo apt install git-lfs
-RUN git lfs update --force
+#RUN sudo apt install git-lfs
+#RUN git lfs update --force
 
-RUN chmod +x "/home/jovyan/automation/docker/cmd.sh"
-CMD ["/home/jovyan/automation/docker/cmd.sh"]
+#RUN chmod +x "/home/jovyan/docker/cmd.sh"
+#CMD ["/home/jovyan/docker/cmd.sh"]
+CMD ["sleep", "infinity"]

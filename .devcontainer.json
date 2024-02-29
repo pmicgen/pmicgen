@@ -1,6 +1,6 @@
 {
     "build": {
-        "dockerfile": "automation/Dockerfile",
+        "dockerfile": "Dockerfile",
         "context": ".",
         "args": {"GRANT_SUDO": "yes"}
     },

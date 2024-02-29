@@ -1,6 +1,6 @@
 from .component import *
 
-import docker
+from align import schematic2layout
 import os
 
 
@@ -13,6 +13,7 @@ class OTA(LDOComponent):
         self.netlist = netlist
 
     def generate(self):
+        """
         client = docker.from_env()
         path = Path(self.netlist).as_posix()
         container = client.containers.run(
@@ -31,3 +32,6 @@ class OTA(LDOComponent):
         
         # Remove the container
         container.remove()
+        """
+        schematic2layout()
+        

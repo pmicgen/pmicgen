@@ -6,7 +6,7 @@ clean:
 	-docker rm -f ldo_cac_jupyter
 
 build:
-	docker build -f automation/Dockerfile -t ldo_cac .
+	docker build -t ldo_cac .
 
 run:
 	docker run -d --name ldo_cac_jupyter -p 8888:8888 -e GRANT_SUDO=yes ldo_cac

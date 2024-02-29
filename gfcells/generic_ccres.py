@@ -11,20 +11,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 import genutils
 
 from .generic_res import resistor
-from .routing_a import routing_a
-from .typings import (
-    MatrixDirection2D,
-    CCResistorCellPort,
-    CCResistorCellPortType,
-    CellCoord,
-    RoutingCoord,
-    LayoutCoord,
-    RoutingMapCharRef,
-)
-from .route_solver import Connection, RouteSolver
-from .cell import Cell
-from .connection import Connection
-
 import gdsfactory as gf
 import pandas as pd
 import numpy as np
@@ -94,15 +80,6 @@ def empty_cell_matrix(
     return matrix
 
 
-@dataclass
-class RouteCellVariants:
-    obstacle: gf.Component
-    target: gf.Component
-
-
-CellTypes = dict[str, RouteCellVariants]
-
-
 # TODO: This function should be a method of MatrixCellRouter
 def get_cell_types(label_matrix: list[list[str]], resistor: gf.Component) -> CellTypes:
     cell_types: CellTypes = {}
@@ -149,59 +126,6 @@ def generic_m1_m2_route_cross_section_spec():
     ]
     return multi_cross_section_angle_spec
 
-
-@dataclass
-class Layer:
-    rows: list[list[MatrixElement]]
-    layer: gf.typings.Layer
-
-    def __str__(self) -> str:
-        def format_char(element):
-            if element is not None:
-                return str(element)
-            else:
-                return RoutingMapCharRef.ROUTE_AVAILABLE.value
-
-        formatted_rows = [
-            "".join([format_char(element) for element in row]) for row in self.rows
-        ]
-
-        return "\n".join(formatted_rows)
-
-    @property
-    def number_of_rows(self):
-        return len(self.rows)
-
-    @property
-    def number_of_columns(self):
-        return len(self.rows[0])
-
-    def add_routing_line(
-        self, index: int, direction: MatrixDirection2D = MatrixDirection2D.Column
-    ) -> None:
-        """Add a route line to the routing matrix array
-
-        :param index: The index of the row or column before the spacing
-        :type index: int
-        :param direction: Enum for selecting column or row insertion
-        :type direction: MatrixDirection2D, optional
-        """
-        arr = np.array(self.rows)
-        if direction == MatrixDirection2D.Column:
-            new_line = [None] * arr.shape[0]
-            new_arr = np.insert(arr, index + 1, new_line, axis=1)
-        elif direction == MatrixDirection2D.Row:
-            new_line = [None] * arr.shape[1]
-            new_arr = np.insert(arr, index + 1, new_line, axis=0)
-        else:
-            return ValueError()
-        self.rows = new_arr.tolist()
-
-
-@dataclass
-class Port:
-    name: str
-    position: LayoutCoord
 
 
 @gf.cell

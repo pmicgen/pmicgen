@@ -8,3 +8,4 @@ numpy==1.26.3
 astar==0.99
 timy==0.4.2
 docker==7.0.0
+align @ git+https://github.com/Mario1159/ALIGN-public

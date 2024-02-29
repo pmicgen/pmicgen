@@ -1,20 +1,20 @@
-# LDO Code a Chip 
+# Automated PMIC Generation
 
-[![https://github.com/Mario1159/LDO_CAC/blob/main/automation/ldo.ipynb](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mario1159/LDO_CAC/blob/main/automation/ldo.ipynb)
+[![https://github.com/pmicgen/pmicgen/blob/main/jupyter/pmic.ipynb](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mario1159/LDO_CAC/blob/main/jupyter/pmic.ipynb)
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Mario1159/LDO_CAC)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 ![https://github.com/psf/black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 > To access the main jupyter in google colab, enable private access in [Colab](https://colab.research.google.com/) > Configuration > Github > Private repository access
 
-Automated generation of an LDO for SKY130
+Automated generation of a PMIC for SKY130
 
 ## Usage
 
 Run latest build of the docker image using the command shown below.
 
 ```
-docker run -d --name ldo_cac_jupyter -p 8888:8888 -e GRANT_SUDO=yes ghcr.io/mario1159/ldo_cac
+docker run -d --name pmicgen-jupyter -p 8888:8888 -e GRANT_SUDO=yes ghcr.io/mario1159/pmcigen-jupyter
 ```
 
 Then open `localhost:8888` in your browser to access the Jupyter notebook.

@@ -144,7 +144,7 @@ def pass_transistor_exploration(lookup_table, Vdd, Vreg, il, R1, R2, lengths, gm
     
     ## First create generic pmos mosfet, for this we should consider:
     ## 1. the vds value the drop voltage from vdd to vreg.
-    pt_lutable = LoadMosfet(lookup_table=lookup_table, mos="nmos", vsb=0, vds=(Vdd-Vreg), vgs=vgs_sweep, lengths = lengths)
+    pt_lutable = LoadMosfet(lookup_table=lookup_table, mos="pmos", vsb=0, vds=-(Vdd-Vreg), vgs=vgs_sweep, lengths = lengths)
     
     ## Creacion de transistor
     pass_transistor = Exploration_Transistor()

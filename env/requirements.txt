@@ -9,4 +9,4 @@ astar==0.99
 timy==0.4.2
 align
 sympy
-gmid @ git+https://github.com/pmicgen/gmid
+mosplot @ git+https://github.com/pmicgen/gmid

@@ -4,7 +4,7 @@ sky130 @ git+https://github.com/Mario1159/skywater130
 gdsfactory
 cca @ git+https://github.com/Mario1159/Common_Centroid_Algorithm
 matplotlib
-numpy==1.26.3
+numpy
 astar==0.99
 timy==0.4.2
 align

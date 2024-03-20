@@ -1,7 +1,7 @@
 # Automated PMIC Generation
 
 [![https://github.com/pmicgen/pmicgen/blob/main/jupyter/pmic.ipynb](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pmicgen/pmicgen/blob/main/jupyter/pmic.ipynb)
-[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Mario1159/LDO_CAC)
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/pmicgen/pmicgen)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 ![https://github.com/psf/black](https://img.shields.io/badge/code%20style-black-000000.svg)
 

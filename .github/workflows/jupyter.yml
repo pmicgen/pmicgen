@@ -25,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: automation/Dockerfile
+          file: docker/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/mario1159/ldo_cac:latest
+          tags: ghcr.io/pmicgen/pmicgen:latest

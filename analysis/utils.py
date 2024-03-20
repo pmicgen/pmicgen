@@ -49,3 +49,32 @@ def node_identification_openloop(template, Vdd="VDD", Vss="VSS", out="OUT", in_p
                 nodes[node]=node_num
                 node_num+=1
     return nodes, nodes[in_pos], node_num
+
+class Ldo():
+    def __init__(self, psr_condition, load_regulation_condition, pm_condition, area_condition):
+        optimize = {}
+        if psr_condition=="min":
+            self.psr_condition = float('inf')
+            optimize["psr_condition"]="min"
+        else:
+            self.psr_condition = psr_condition
+
+        if load_regulation_condition=="min":
+            self.load_regulation_condition = float('inf')
+            optimize["load_regulation_condition"]="min"
+        else:
+            self.load_regulation_condition = load_regulation_condition
+
+        if pm_condition=="max":
+            self.pm_condition = float('-inf')
+            optimize["pm_condition"]="max"
+        else:
+            self.pm_condition = pm_condition
+
+        if area_condition=="min":
+            self.area_condition = float('inf')
+            optimize["area_condition"]="min"
+        else:
+            self.area_condition = area_condition
+
+        self.optimize = optimize

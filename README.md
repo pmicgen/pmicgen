@@ -1,6 +1,6 @@
 # Automated PMIC Generation
 
-[![https://github.com/pmicgen/pmicgen/blob/main/jupyter/pmic.ipynb](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mario1159/LDO_CAC/blob/main/jupyter/pmic.ipynb)
+[![https://github.com/pmicgen/pmicgen/blob/main/jupyter/pmic.ipynb](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pmicgren/pmicgen/blob/main/jupyter/pmic.ipynb)
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Mario1159/LDO_CAC)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 ![https://github.com/psf/black](https://img.shields.io/badge/code%20style-black-000000.svg)
@@ -14,7 +14,7 @@ Automated generation of a PMIC for SKY130
 Run latest build of the docker image using the command shown below.
 
 ```
-docker run -d --name pmicgen-jupyter -p 8888:8888 -e GRANT_SUDO=yes ghcr.io/mario1159/pmcigen-jupyter
+docker run -d --name pmicgen-jupyter -p 8888:8888 -e GRANT_SUDO=yes ghcr.io/pmicgen/pmicgen-jupyter
 ```
 
 Then open `localhost:8888` in your browser to access the Jupyter notebook.

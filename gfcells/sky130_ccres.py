@@ -4,15 +4,14 @@ import sky130.components as sc
 import sky130.tech as st
 import sky130.pcells as pc
 
-from .routing_a import routing_a
-from .generic_ccres import empty_cell_matrix, get_cell_types, common_centroid_resistor, MatrixCellRouter
+from .generic_ccres import empty_cell_matrix, get_cell_types, common_centroid_resistor
 from .sky130_res import sky130_resistor
 
 import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-import genutils
+import generation
 
 import math
 
@@ -109,4 +108,5 @@ def sky130_common_centroid_resistor(
         ),
         routing_fn=routing_fn,
     )
-    return matrix
+    # return matrix
+    return non_routed_matrix

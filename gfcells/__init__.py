@@ -18,12 +18,8 @@ match ENV_GF_PDK:
         pdk = get_generic_pdk()
 pdk.activate()
 
-from .typings import *
-
 match ENV_GF_PDK:
     case "sky130":
         from .sky130 import *
     case "generic":
-        from .routing_a import *
         from .generic_ccres import *
-        from .route_solver import *

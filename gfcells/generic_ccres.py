@@ -8,7 +8,6 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-import genutils
 
 from .generic_res import resistor
 import gdsfactory as gf
@@ -140,8 +139,9 @@ def common_centroid_resistor(
 
 
 def generic_common_centroid_resistor(
-    element_count: int = 15, ratio: float = 0.4, row_number: int = 5, routing_fn = routing_a
+    element_count: int = 15, ratio: float = 0.4, row_number: int = 5
 ) -> gf.Component:
+    """, routing_fn = routing_a"""
     genutils.CCResistor(tech=genutils.TechManager(genutils.PDK(genutils.PDK.SKY130A)))
     ccm = genutils.ccres.CommonCentroidMatrix(
         element_count=element_count, ratio=ratio, row_number=row_number

@@ -5,3 +5,4 @@ pmicgen.egg-info/
 .logs
 Pipfile
 Pipfile.lock
+LOG/

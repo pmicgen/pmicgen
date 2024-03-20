@@ -1,11 +1,12 @@
 argparse==1.4.0
 volare==0.15.2
 sky130 @ git+https://github.com/Mario1159/skywater130
-gdsfactory @ git+https://github.com/Mario1159/gdsfactory
+gdsfactory
 cca @ git+https://github.com/Mario1159/Common_Centroid_Algorithm
 matplotlib==3.8.2
 numpy==1.26.3
 astar==0.99
 timy==0.4.2
-docker==7.0.0
-align @ git+https://github.com/Mario1159/ALIGN-public
+align
+sympy
+gmid @ https://github.com/pmicgen/gmid

@@ -9,4 +9,4 @@ astar==0.99
 timy==0.4.2
 align
 sympy
-gmid @ https://github.com/pmicgen/gmid
+gmid @ git+https://github.com/pmicgen/gmid

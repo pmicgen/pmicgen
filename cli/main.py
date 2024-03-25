@@ -2,7 +2,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from genutils import *
+from generation import *
 
 import argparse
 
@@ -37,10 +37,10 @@ def main():
             component = PMOSWaffle(tech=tech, mult=int(args.mult))
             component.generate()
         case LDOComponentType.OTA.value:
-            component = OTA(tech=tech, netlist=str(args.netlist)
+            component = OTA(tech=tech, netlist=str(args.netlist))
             component.generate()
         case LDOComponentType.CCRESISTOR.value:
-            component = CCResistor(tech=tech, columns=int(columns), rows=int(rows))
+            component = CCResistor(tech=tech, columns=int(args.columns), rows=int(args.rows))
             component.generate()
         case LDOComponentType.BGR.value:
             component = BGR(tech=tech)

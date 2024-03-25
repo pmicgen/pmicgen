@@ -4,7 +4,7 @@ VERSION = "0.0.1"
 DESCRIPTION = "Automated generation of an PMIC for SKY130"
 LONG_DESCRIPTION = "Automated generation of an PMIC for SKY130"
 
-with open('requirements.txt') as f:
+with open('env/requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setup(

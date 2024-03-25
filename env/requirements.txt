@@ -9,3 +9,4 @@ timy==0.4.2
 align
 sympy
 mosplot @ git+https://github.com/pmicgen/gmid
+matplotlib==3.7.1

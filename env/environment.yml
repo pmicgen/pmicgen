@@ -5,7 +5,7 @@ channels:
   - defaults
 dependencies:
   - python=3.10.*
-  - ipykernel=7.34
+  - ipykernel
   - jupyterlab
   - ngspice
   - magic

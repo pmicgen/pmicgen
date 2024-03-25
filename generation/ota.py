@@ -1,6 +1,6 @@
 from .component import *
 
-from align import schematic2layout
+import align
 import os
 
 
@@ -33,5 +33,5 @@ class OTA(LDOComponent):
         # Remove the container
         container.remove()
         """
-        schematic2layout()
+        align.schematic2layout(self.netlist.abspath(), "thirdparty/align-sky130")
         

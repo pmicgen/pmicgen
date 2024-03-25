@@ -41,17 +41,17 @@ RUN \
     echo conda activate "${env_name}" >> "/home/jovyan/.bashrc"
 
 # Remove previous default kernel
-#RUN jupyter kernelspec remove -y python3
+RUN jupyter kernelspec remove -y python3
 
-#USER jovyan
-#RUN "/opt/conda/envs/${env_name}/bin/volare" enable $("/opt/conda/envs/${env_name}/bin/volare" ls-remote | sed -n '1 p')
+USER jovyan
+RUN "/opt/conda/envs/${env_name}/bin/volare" enable $("/opt/conda/envs/${env_name}/bin/volare" ls-remote | sed -n '1 p')
 
-#COPY --chown=jovyan:users . .
+COPY --chown=jovyan:users . .
 
 # Set up Git LFS
-#RUN sudo apt install git-lfs
-#RUN git lfs update --force
+RUN sudo apt install git-lfs
+RUN git lfs update --force
 
-#RUN chmod +x "/home/jovyan/docker/cmd.sh"
-#CMD ["/home/jovyan/docker/cmd.sh"]
+RUN chmod +x "/home/jovyan/docker/cmd.sh"
+CMD ["/home/jovyan/docker/cmd.sh"]
 CMD ["sleep", "infinity"]

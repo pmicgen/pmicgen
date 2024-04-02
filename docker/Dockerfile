@@ -54,4 +54,3 @@ RUN git lfs update --force
 
 RUN chmod +x "/home/jovyan/docker/cmd.sh"
 CMD ["/home/jovyan/docker/cmd.sh"]
-CMD ["sleep", "infinity"]

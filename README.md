@@ -5,8 +5,6 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 ![https://github.com/psf/black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-> To access the main jupyter in google colab, enable private access in [Colab](https://colab.research.google.com/) > Configuration > Github > Private repository access
-
 Automated generation of a PMIC for SKY130
 
 ## Usage
@@ -14,7 +12,7 @@ Automated generation of a PMIC for SKY130
 Run latest build of the docker image using the command shown below.
 
 ```
-docker run -d --name pmicgen-jupyter -p 8888:8888 -e GRANT_SUDO=yes ghcr.io/pmicgen/pmicgen-jupyter
+docker run -d --name pmicgen-jupyter -p 8888:8888 -e GRANT_SUDO=yes ghcr.io/pmicgen/pmicgen
 ```
 
 Then open `localhost:8888` in your browser to access the Jupyter notebook.

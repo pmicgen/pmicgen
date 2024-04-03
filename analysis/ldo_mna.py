@@ -1,5 +1,5 @@
 import sympy as sym
-from gmid.mosplot import LoadMosfet
+from mosplot import LoadMosfet
 import numpy as np
 
 class Transistor():

@@ -1,5 +1,5 @@
 import numpy as np
-from gmid.mosplot.parsers.ngspice_parser import NgspiceRawFileReader
+from mosplot.parsers.ngspice_parser import NgspiceRawFileReader
 #from ldo_small_signal_modeling import small_signal_model
 import os
 

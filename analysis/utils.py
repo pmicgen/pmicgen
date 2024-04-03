@@ -1,4 +1,4 @@
-from gmid.mosplot.parsers.ngspice_parser import NgspiceRawFileReader
+from mosplot.parsers.ngspice_parser import NgspiceRawFileReader
 
 def op_parser(template):
     ars, _ = NgspiceRawFileReader().read_file(template.output_file_path)

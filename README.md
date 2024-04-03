@@ -7,6 +7,8 @@
 
 Automated generation of a PMIC for SKY130
 
+> :warning: Repository under work in progress, not ready for normal usage
+
 ## Usage
 
 Run latest build of the docker image using the command shown below.
@@ -27,10 +29,15 @@ This script is executed in detail providing some reports inside the jupyter note
 
 ## Directory structure
     .
+    ├── analysis             # Parameter calculation algorithm
     ├── cli                  # Command line interface parsing
+    ├── env                  # Dependencies to be installed
+    ├── docker               # Dockerfile & run scripts
     ├── generation           # Algorithms and automated generation utilities
     ├── gfcells              # GDSFactory Layouts
+    ├── jupyter              # Jupyter notebook as trial
     ├── magic                # Magic VLSI Designs
     ├── pymacros             # KLayout cell library
     ├── test                 # Unit tests
-    └── thirdparty           # Submodules of external projects
+    ├── thirdparty           # Submodules of external projects
+    └── xschem               # Testbenchs in xschem

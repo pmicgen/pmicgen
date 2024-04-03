@@ -6,10 +6,10 @@ clean:
 	-docker rm -f ldo_cac_jupyter
 
 build:
-	docker build -t ldo_cac .
+	docker build -t pmicgen_jupyter -f docker/Dockerfile .
 
 run:
-	docker run -d --name ldo_cac_jupyter -p 8888:8888 -e GRANT_SUDO=yes ldo_cac
+	docker run -d --name pmicgen_jupyter -p 8888:8888 -e GRANT_SUDO=yes ldo_cac
 
 remote-run:
 	@if [ -z "$GITHUB_PAT" ]; then\

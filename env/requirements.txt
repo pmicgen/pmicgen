@@ -12,3 +12,4 @@ mosplot @ git+https://github.com/pmicgen/gmid
 matplotlib==3.7.1
 ipython==7.34
 pyzmq==23.2.1
+paretoset

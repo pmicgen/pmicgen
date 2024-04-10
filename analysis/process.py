@@ -1,3 +1,5 @@
+from analysis.symbolic_mna import symbolic_mna
+
 def open_loop_macromodel_generation():
     pass
 

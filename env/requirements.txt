@@ -6,7 +6,7 @@ cca @ git+https://github.com/pmicgen/Common_Centroid_Algorithm
 numpy
 astar==0.99
 timy==0.4.2
-align
+align @ git+https://github.com/ALIGN-analoglayout/ALIGN-public
 sympy
 mosplot @ git+https://github.com/pmicgen/gmid
 matplotlib==3.7.1

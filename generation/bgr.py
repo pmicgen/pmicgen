@@ -20,7 +20,7 @@ class BGR(LDOComponent):
                 '-noconsole',
                 "-rcfile",
                 self.tech.magicrc_path(),
-                "automation/thirdparty/bgr/layout/bandgaptop_hybrid_hier.mag",
+                "magic/bgr-jkustin/layout/bandgaptop_hybrid_hier.mag",
 		    ],
             stdin = subprocess.PIPE,
             stdout=subprocess.PIPE,

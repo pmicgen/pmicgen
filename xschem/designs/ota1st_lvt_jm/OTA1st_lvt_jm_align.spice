@@ -1,8 +1,0 @@
-.subckt erroramp OUT VDD VSS Vas Vsrc ibias
-XM1 Vas IN_M Vsrc VSS nmos_lvt L=0.5 W=1 nf=1 m=1
-XM2 OUT IN_P Vsrc VSS nmos_lvt L=0.5 W=1 nf=1 m=1
-XM3 Vas Vas VDD VDD pmos_lvt L=0.8 W=1 nf=1 m=1
-XM4 OUT Vas VDD VDD pmos_lvt L=0.8 W=1 nf=1 m=1
-XM7 Vsrc ibias VSS VSS nmos_lvt L=1 W=0.5 nf=1 m=1
-XM8 ibias ibias VSS VSS nmos_lvt L=1 W=0.5 nf=1 m=1
-.end

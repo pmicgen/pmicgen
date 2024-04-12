@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from generation import *
 
 import argparse
+from pathlib import Path
 
 
 def main():
@@ -37,7 +38,7 @@ def main():
             component = PMOSWaffle(tech=tech, mult=int(args.mult))
             component.generate()
         case LDOComponentType.OTA.value:
-            component = OTA(tech=tech, netlist=str(args.netlist))
+            component = OTA(tech=tech, netlist=Path(str(args.netlist)))
             component.generate()
         case LDOComponentType.CCRESISTOR.value:
             component = CCResistor(tech=tech, columns=int(args.columns), rows=int(args.rows))

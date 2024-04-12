@@ -16,6 +16,9 @@ class TechManager():
     
     def magicrc_path(self):
         return f"{self.pdk_root_path()}/libs.tech/magic/{self.pdk.value}.magicrc"
+    
+    def xschemrc_path(self):
+        return f"{self.pdk_root_path()}/libs.tech/xschem/xschem/xschemrc"
 
 class LDOComponentType(Enum):
     PMOS_WAFFLE = "pmosw"

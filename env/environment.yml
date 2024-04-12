@@ -8,5 +8,6 @@ dependencies:
   - ipykernel
   - jupyterlab
   - ngspice
+  - xschem
   - magic
   - netgen

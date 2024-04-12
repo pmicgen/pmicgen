@@ -21,7 +21,7 @@ class BGR(LDOComponent):
                 "-noconsole",
                 "-rcfile",
                 self.tech.magicrc_path(),
-                "magic/bgr-jkustin/layout/bandgaptop_hybrid_hier.mag",
+                "magic/bgr-jkustin/bandgaptop_hybrid_hier.mag",
             ],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
@@ -33,8 +33,6 @@ class BGR(LDOComponent):
 
         path = Path("build/sky130_bgr/gds")
         path.mkdir(parents=True, exist_ok=True)
- 
-        proc.communicate()
 
         proc.stdin.write("gds write build/sky130_bgr/gds/bgr.gds\n")
         proc.stdin.write("quit -noprompt\n")
@@ -47,7 +45,7 @@ class BGR(LDOComponent):
                 "--simulate",
                 "--rcfile",
                 self.tech.xschemrc_path(),
-                "xschem/bgr-jkustin/layout/tb_bgr",
+                "xschem/bgr-jkustin/tb_bgr",
             ],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,

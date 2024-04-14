@@ -63,22 +63,6 @@ class PMOSWaffle(LDOComponent):
 
     def generate(self):
         self._update_tcl_file()
-        """
-        proc = subprocess.run(
-            [
-                "magic",
-                "-dnull",
-                "-noconsole",
-                f"-rcfile {self.tech.magicrc_path()}",
-                f"{PMOSWaffle._waffle_folder()}/waffles_pmos.tcl",
-            ],
-            cwd=PMOSWaffle._waffle_folder(),
-            env=os.environ.copy(),
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=False,
-        )"""
 
         proc = subprocess.Popen(
             [
@@ -102,6 +86,8 @@ class PMOSWaffle(LDOComponent):
 
         proc.stdin.write("gds write build/sky130_pmosw/gds/pmosw.gds\n")
         proc.stdin.write("quit -noprompt\n")
+
+        proc.communicate()
 
 
 PassTransistor = PMOSWaffle

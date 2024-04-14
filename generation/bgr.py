@@ -45,7 +45,7 @@ class BGR(LDOComponent):
                 "-r",
                 "-n",
                 "--rcfile",
-                "xschemrc"
+                "xschemrc",
                 "tests/tb_bgr.sch",
             ],
             stdin=subprocess.PIPE,

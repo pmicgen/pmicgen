@@ -9,5 +9,6 @@ dependencies:
   - jupyterlab
   - ngspice
   - xschem
+  - xterm
   - magic
   - netgen

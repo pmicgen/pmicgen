@@ -43,19 +43,41 @@ class BGR(LDOComponent):
                 "xschem",
                 "-q",
                 "-r",
-                "-o",
-                "build/sky130_bgr"
-                "--simulate",
+                "--no_x"
                 "--rcfile",
-                self.tech.xschemrc_path(),
-                "xschem/bgr-jkustin/tb_bgr",
+                "xschemrc"
+                "tests/tb_bgr.sch",
             ],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
-            cwd=".",
+            cwd="xschem",
             env=os.environ,
             universal_newlines=True,
         )
 
         proc.communicate()
+
+        # TODO: Generalize paths
+        proc = subprocess.Popen(
+            [
+                "ngspice",
+                "-b",
+                "-a",
+                "-o"
+                "/content/pmicgen/build/sky130_bgr/bgr.report",
+                "-r",
+                "/content/pmicgen/build/sky130_bgr/bgr.raw",
+                "xschemrc"
+                "/root/.xschem/simulations/tb_bgr.spice",
+            ],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            cwd="xschem",
+            env=os.environ,
+            universal_newlines=True,
+        )
+
+        proc.communicate()
+

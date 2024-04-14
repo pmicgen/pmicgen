@@ -43,7 +43,7 @@ class BGR(LDOComponent):
                 "xschem",
                 "-q",
                 "-r",
-                "-n"
+                "-n",
                 "--rcfile",
                 "xschemrc"
                 "tests/tb_bgr.sch",
@@ -64,12 +64,12 @@ class BGR(LDOComponent):
                 "ngspice",
                 "-b",
                 "-a",
-                "-o"
+                "-o",
                 "/content/pmicgen/build/sky130_bgr/bgr.report",
                 "-r",
                 "/content/pmicgen/build/sky130_bgr/bgr.raw",
-                "-rcfile"
-                "xschemrc"
+                "-rcfile",
+                "xschemrc",
                 "/root/.xschem/simulations/tb_bgr.spice",
             ],
             stdin=subprocess.PIPE,

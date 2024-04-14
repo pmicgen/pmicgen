@@ -43,7 +43,7 @@ class BGR(LDOComponent):
                 "xschem",
                 "-q",
                 "-r",
-                "--no_x"
+                "-n"
                 "--rcfile",
                 "xschemrc"
                 "tests/tb_bgr.sch",
@@ -68,7 +68,7 @@ class BGR(LDOComponent):
                 "/content/pmicgen/build/sky130_bgr/bgr.report",
                 "-r",
                 "/content/pmicgen/build/sky130_bgr/bgr.raw",
-                "--rcfile"
+                "-rcfile"
                 "xschemrc"
                 "/root/.xschem/simulations/tb_bgr.spice",
             ],

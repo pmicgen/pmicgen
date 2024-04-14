@@ -41,7 +41,10 @@ class BGR(LDOComponent):
         proc = subprocess.Popen(
             [
                 "xschem",
-                "--no_x",
+                "-q",
+                "-r",
+                "-o",
+                "build/bgr-jkustin"
                 "--simulate",
                 "--rcfile",
                 self.tech.xschemrc_path(),

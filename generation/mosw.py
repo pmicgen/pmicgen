@@ -16,7 +16,7 @@ class PMOSWaffle(LDOComponent):
 
     def _waffle_folder() -> str:
         #return f"{pathlib.Path(__file__).parent.parent.resolve()}/magic/moswaffle"
-        return "/home/jovyan/automation/magic/moswaffle"
+        return "/content/pmicgen/magic/moswaffle"
 
     def _update_tcl_file(self) -> None:
         pmos_tcl = open(f"{PMOSWaffle._waffle_folder()}/waffles_pmos.tcl", "r")

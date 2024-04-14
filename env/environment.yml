@@ -2,6 +2,7 @@ name: pyicenv
 channels:
   - litex-hub
   - conda-forge
+  - bioconda
   - defaults
 dependencies:
   - python=3.10.*
@@ -9,6 +10,6 @@ dependencies:
   - jupyterlab
   - ngspice
   - xschem
-  - xterm
+  - xtermcolor
   - magic
   - netgen

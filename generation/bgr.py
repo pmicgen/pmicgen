@@ -68,8 +68,6 @@ class BGR(LDOComponent):
                 "/content/pmicgen/build/sky130_bgr/bgr.report",
                 "-r",
                 "/content/pmicgen/build/sky130_bgr/bgr.raw",
-                "-rcfile",
-                "xschemrc",
                 "/root/.xschem/simulations/tb_bgr.spice",
             ],
             stdin=subprocess.PIPE,

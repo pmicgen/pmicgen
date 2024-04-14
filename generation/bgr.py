@@ -44,7 +44,7 @@ class BGR(LDOComponent):
                 "-q",
                 "-r",
                 "-o",
-                "build/bgr-jkustin"
+                "build/sky130_bgr"
                 "--simulate",
                 "--rcfile",
                 self.tech.xschemrc_path(),

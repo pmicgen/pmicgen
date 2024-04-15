@@ -1,0 +1,22 @@
+
+XM1 VDS VGS VSS VSS sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4.38 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult='mul' m='mul'
+VGS VGS GND {VGS}
+VSS VSS GND 0
+VD VDS VSS 5
+
+.param VGS = 5
+.param mul = 2520
+.option temp = 70
+.lib /foss/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+.control
+save i(VD)
+dc VD 0 10 0.0001
+wrdata /content/pmicgen/build/sky130_pmosw/pmosw.csv i(VD)
+set appendwrite
+.endc
+
+.GLOBAL GND
+.end

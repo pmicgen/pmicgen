@@ -13,6 +13,7 @@ class PMOSWaffle(LDOComponent):
         p_cells = {4512: 48, 1300: 32, 480: 28}
         p_cell = p_cells[mult]
         self.p_cell = p_cell
+        self.mult = mult
 
     def _waffle_folder() -> str:
         #return f"{pathlib.Path(__file__).parent.parent.resolve()}/magic/moswaffle"
@@ -61,8 +62,24 @@ class PMOSWaffle(LDOComponent):
             pmos_tcl.write(line)
         pmos_tcl.close()
 
+    def _update_spice_file(self):
+        pmosw_spice = open("/content/pmicgen/xschem/designs/pmosw/pmosw.spice", "r")
+        pmos_data = []
+
+        for line in pmosw_spice:
+            pmos_data.append(line)
+        pmosw_spice.close()
+
+        pmos_data[10] = f".param mul = {self.mult}"
+
+        pmosw_spice = open("/content/pmicgen/xschem/designs/pmosw/pmosw.spice", "w")
+        for line in pmos_data:
+            pmosw_spice.write(line)
+        pmosw_spice.close()
+
     def generate(self):
         self._update_tcl_file()
+        self._update_spice_file()
 
         proc = subprocess.Popen(
                     [

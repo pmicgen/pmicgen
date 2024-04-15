@@ -14,7 +14,7 @@ VD VDS VSS 5
 .control
 save i(VD)
 dc VD 0 10 0.0001
-wrdata /content/pmicgen/build/sky130_pmosw/pmosw.csv i(VD)
+wrdata /content/pmicgen/build/sky130_pmosw/ngspice/pre_tb/id_vds.raw i(VD)
 set appendwrite
 .endc
 

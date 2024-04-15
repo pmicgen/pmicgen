@@ -70,7 +70,7 @@ class PMOSWaffle(LDOComponent):
             pmos_data.append(line)
         pmosw_spice.close()
 
-        pmos_data[10] = f".param mul = {self.mult}"
+        pmos_data[9] = f".param mul = {self.mult}\n"
 
         pmosw_spice = open("/content/pmicgen/xschem/designs/pmosw/pmosw.spice", "w")
         for line in pmos_data:

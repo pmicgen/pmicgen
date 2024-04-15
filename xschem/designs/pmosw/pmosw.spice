@@ -9,7 +9,7 @@ VD VDS VSS 5
 .param VGS = 5
 .param mul = 2520
 .option temp = 70
-.lib /foss/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.lib /root/.volare/sky130A/libs.tech/ngspice/sky130.lib.spice tt
 
 .control
 save i(VD)

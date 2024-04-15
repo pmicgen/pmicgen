@@ -1,5 +1,5 @@
 from .component import *
-import pathlib
+from pathlib import Path
 import subprocess
 import sys
 import os
@@ -65,26 +65,26 @@ class PMOSWaffle(LDOComponent):
         self._update_tcl_file()
 
         proc = subprocess.Popen(
-            [
-                "magic",
-                "-dnull",
-                "-noconsole",
-                "-rcfile",
-                self.tech.magicrc_path(),
-                f"{PMOSWaffle._waffle_folder()}/waffles_pmos.tcl",
-            ],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            cwd=PMOSWaffle._waffle_folder(),
-            env=os.environ,
-            universal_newlines=True,
-        )
+                    [
+                        "magic",
+                        "-dnull",
+                        "-noconsole",
+                        "-rcfile",
+                        "/root/.volare/libs.tech/magic/sky130A.magicrc",
+                        "/content/pmicgen/magic/moswaffle/waffles_pmos.tcl",
+                    ],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    cwd="/content/pmicgen/magic/moswaffle",
+                    env=os.environ,
+                    universal_newlines=True,
+                )
 
         path = Path("build/sky130_pmosw/gds")
         path.mkdir(parents=True, exist_ok=True)
 
-        proc.stdin.write("gds write build/sky130_pmosw/gds/pmosw.gds\n")
+        proc.stdin.write("gds write ../../build/sky130_pmosw/gds/pmosw.gds\n")
         proc.stdin.write("quit -noprompt\n")
 
         proc.communicate()

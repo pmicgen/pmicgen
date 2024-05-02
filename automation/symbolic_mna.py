@@ -537,9 +537,9 @@ class symbolic_mna():
 
             if x == 'L':
                 if self.i_unk > 1:  #is self.D greater than 1 by 1?
-                    self.D[sn,sn] += -s*sympify(self.df.loc[i,'element'])
+                    self.D[sn,sn] += -self.s*sympify(self.df.loc[i,'element'])
                 else:
-                    self.D[sn] += -s*sympify(self.df.loc[i,'element'])
+                    self.D[sn] += -self.s*sympify(self.df.loc[i,'element'])
                 sn += 1   #increment source count
 
             if x == 'H':  # H: ccvs

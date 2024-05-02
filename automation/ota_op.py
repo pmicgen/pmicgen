@@ -38,14 +38,15 @@ class template_generator():
     def ngspice_parameters(self):
         self.identifier = "nmos"
         self.parameter_table = {}
+        print(self.devices)
         for idx, device in enumerate(self.devices):
             
             device_parameter_table = {
                 # parameter name : [name recognized by simulator, name used in the output file],
-                "gm_"+device.name.lower()   : ["save @m.x1."+device.name+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[gm]"   , "@m.x1."+device.name.lower()+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[gm]"],
-                "gds_"+device.name.lower()  : ["save @m.x1."+device.name+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[gds]"  , "@m.x1."+device.name.lower()+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[gds]"],
-                "cgs_"+device.name.lower()  : ["save @m.x1."+device.name+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[cgs]"  , "@m.x1."+device.name.lower()+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[cgs]"],
-                "cgd_"+device.name.lower()  : ["save @m.x1."+device.name+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[cgd]"  , "@m.x1."+device.name.lower()+"."+self.device_params_instantiation_model.format(device_model=device.model)+"[cgd]"],
+                "gm_"+device.name.lower()   : ["save @"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[gm]"   , "@"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[gm]"],
+                "gds_"+device.name.lower()  : ["save @"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[gds]"  , "@"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[gds]"],
+                "cgs_"+device.name.lower()  : ["save @"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[cgs]"  , "@"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[cgs]"],
+                "cgd_"+device.name.lower()  : ["save @"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[cgd]"  , "@"+self.device_params_instantiation_model.format(model_name=device.name ,device_model=device.model)+"[cgd]"],
             }
 
             self.parameter_table.update(device_parameter_table)
@@ -141,7 +142,7 @@ class template_generator():
         f.write("\n".join(netlist))
         f.close()
 
-        os.remove("temp.spice")
+        #os.remove("temp.spice")
     
 
 class device():
